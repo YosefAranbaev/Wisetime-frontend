@@ -18,7 +18,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container">
-            <a href="./home.html" class="navbar-brand">WiseTime</a>
+            <a href="./home.html" class="navbar-brand" id="logo">WiseTime</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,7 +39,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                             aria-haspopup="true" aria-expanded="false">
-                            <img src="./images/no-profile-photo.png" class="rounded-circle align-self-center me-2"
+                            <img src="./images/shlomo.png" class="rounded-circle align-self-center me-2"
                                 style="width: 32px;">
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -67,14 +67,40 @@
                 </fieldset>
                 <fieldset>
                     <label for="appt">Start Time:</label><br>
-                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="12:00">
+                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00">
                 </fieldset>
                 <fieldset>
                     <label for="appt">End Time:</label><br>
-                    <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="12:00">
+                    <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="00:00">
                 </fieldset>
                 <fieldset>
-                    <input type="color" name="color" value="#ffda24">
+                    <!-- <input type="color" name="color" value="#ffda24"> -->
+                    <div class="radio-list">
+                        <label class="radio">
+                          <input class="radio-input" type="radio" name="color" value="green">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark green"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                          <input class="radio-input" type="radio" checked="checked" name="color" value="red">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark red"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                          <input class="radio-input" type="radio" name="color" value="yellow">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark yellow"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                            <input class="radio-input" type="radio" name="color" value="blue">
+                            <span class="radio-checkmark-box">
+                              <span class="radio-checkmark blue"></span>
+                            </span>
+                          </label>
+                      </div>
                 </fieldset>
                 <fieldset>
                     <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
