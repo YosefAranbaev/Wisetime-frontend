@@ -1,3 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200&display=swap');
+
 body {
     padding-top: 4.5rem;
+}
+
+#logo {
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 46px;
+    background-size: auto;
+
+    font-family: 'Readex Pro', sans-serif;
 }

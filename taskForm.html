@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    <title>WiseTime</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel='stylesheet' href='stylesheets/style.css' />
+    <link rel='stylesheet' href='stylesheets/taskForm.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./scripts/calendar.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container">
+            <a href="./home.html" class="navbar-brand" id="logo">WiseTime</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a href="./home.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item" data-turbolinks="false">
+                        <a href="./calendar.html" class="nav-link">Calendar</a>
+                    </li>
+                    <li class="nav-item" data-turbolinks="false">
+                        <a href="./taskForm.html" class="nav-link active">Add Task</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img src="./images/shlomo.png" class="rounded-circle align-self-center me-2"
+                                style="width: 32px;">
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <h5 class="dropdown-item-text mb-0 username"></h5>
+                            <p class="dropdown-item-text text-muted mb-0 userEmail"></p>
+                            <div class="dropdown-divider"></div>
+                            <a href="./index.html" class="dropdown-item">Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <div class="taskForm">
+            <form id="contact" action="http://localhost:3000/api/tasks" method="post">
+                <h3>Add Task</h3>
+
+                <fieldset>
+                    <input placeholder="Subject" type="text" tabindex="1" name="name">
+                </fieldset>
+                <fieldset>
+                    <input type="date" id="start" name="day" value="2021-07-22" min="2000-01-01"
+                        max="2050-12-31">
+                </fieldset>
+                <fieldset>
+                    <label for="appt">Start Time:</label><br>
+                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00">
+                </fieldset>
+                <fieldset>
+                    <label for="appt">End Time:</label><br>
+                    <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="00:00">
+                </fieldset>
+                <fieldset>
+                    <!-- <input type="color" name="color" value="#ffda24"> -->
+                    <div class="radio-list">
+                        <label class="radio">
+                          <input class="radio-input" type="radio" name="color" value="green">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark green"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                          <input class="radio-input" type="radio" checked="checked" name="color" value="red">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark red"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                          <input class="radio-input" type="radio" name="color" value="yellow">
+                          <span class="radio-checkmark-box">
+                            <span class="radio-checkmark yellow"></span>
+                          </span>
+                        </label>
+                        <label class="radio">
+                            <input class="radio-input" type="radio" name="color" value="blue">
+                            <span class="radio-checkmark-box">
+                              <span class="radio-checkmark blue"></span>
+                            </span>
+                          </label>
+                      </div>
+                </fieldset>
+                <fieldset>
+                    <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </main>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
