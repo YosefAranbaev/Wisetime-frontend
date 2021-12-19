@@ -79,6 +79,11 @@ const do_ = () => {
                + ' time-from-' + hours[element.hour_start_time]
                + ' time-to-' + hours[element.hour_end_time]
                + ' nt bg-' + element.color + '">'
+               + ' <div class="icons">'
+               + ' <a href="#" class="done" title="Done"><i class="fas fa-check"></i></a>'
+               + ' <a href="#" class="update" title="Update"><i class="fas fa-pen"></i></a>'
+               + ' <a href="#" class="delete" title="Delete"><i class="fas fa-times"></i></a>'
+               + ' </div>'
                + element.name
                + '</div>'
            )
