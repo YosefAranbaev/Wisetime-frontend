@@ -13,3 +13,8 @@ body {
 
     font-family: 'Readex Pro', sans-serif;
 }
+
+button {
+    all: unset;
+    cursor: pointer;
+}
