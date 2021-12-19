@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel='stylesheet' href='stylesheets/style.css' />
-    <link rel='stylesheet' href='stylesheets/taskForm.css' />
+    <link rel='stylesheet' href='stylesheets/forms.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./scripts/calendar.js"></script>
 </head>
@@ -53,10 +53,44 @@
     <main role="main" class="container">
         <div class="taskForm">
             <h1>Welcome to WiseTime!</h1>
-            <form>
+            <form action="http://127.0.0.1:5500/wisetime-frontend/home.html"  method="GET">
                 <label>Select preferred time of the day for the next categories:</label><br>
-                
-                <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+                <section class="categoriesTime">
+                    <section class="categories">
+                        <p class="weekDay">Study</p>
+                        <p class="weekDay">Work</p>
+                        <p class="weekDay">Hobby</p>
+                        <p class="weekDay">Chores</p>
+                    </section>
+                    <section class="timeOfDay">
+                        <select>
+                            <option>Any</option>
+                            <option>Morning</option>
+                            <option>Day</option>
+                            <option>Evening</option>
+                        </select>
+                        <select>
+                            <option>Any</option>
+                            <option>Morning</option>
+                            <option>Day</option>
+                            <option>Evening</option>
+                        </select>
+                        <select>
+                            <option>Any</option>
+                            <option>Morning</option>
+                            <option>Day</option>
+                            <option>Evening</option>
+                        </select>
+                        <select>
+                            <option>Any</option>
+                            <option>Morning</option>
+                            <option>Day</option>
+                            <option>Evening</option>
+                        </select>
+                    </section>
+                </section>
+
+                    <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
             </form>
         </div>
     </main>

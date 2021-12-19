@@ -160,23 +160,31 @@ button[type="submit"]:active {
   background-color: blue;
 }
 
-.workingTimePerDay {
+.workingTimePerDay, .categoriesTime {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .workingTimePerDay .timeRange {
   margin-top: 10px;
 }
 
-.workingTimePerDay .days {
+.workingTimePerDay .days, .categories {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: 10px 10px 20px 0;
+  margin: 10px 10px 0 0;
 }
 
 .workingTimePerDay .weekDay {
   font-size: 14px;
   text-align: right;
 }
+
+.categoriesTime .timeOfDay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
