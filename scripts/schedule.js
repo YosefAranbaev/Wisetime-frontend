@@ -80,9 +80,9 @@ const do_ = () => {
                + ' time-to-' + hours[element.hour_end_time]
                + ' nt bg-' + element.color + '">'
                + ' <div class="icons">'
-               + ' <a href="#" class="done" title="Done"><i class="fas fa-check"></i></a>'
-               + ' <a href="#" class="update" title="Update"><i class="fas fa-pen"></i></a>'
-               + ' <a href="#" class="delete" title="Delete"><i class="fas fa-times"></i></a>'
+               + ' <button title="Done" onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
+               + ' <button title="Update" onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
+               + ' <button title="Delete" href="#myModal" class="trigger-btn" data-toggle="modal" onclick="deleteTask(this)"><i class="fas fa-times"></i></button>'
                + ' </div>'
                + element.name
                + '</div>'
@@ -131,3 +131,15 @@ const get_time_set = async () => {
 //     })
 // }
 // do1_();
+
+const doneTask = (task) => {
+
+};
+
+const updateTask = (task) => {
+
+};
+
+const deleteTask = (task) => {
+    
+};

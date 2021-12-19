@@ -555,7 +555,7 @@ body {
     opacity: 90%;
 }
 
-.schedule-item a {
+.schedule-item button {
     color: black;
     font-size: 8px;
     margin: 1px;
@@ -563,7 +563,7 @@ body {
     border-radius: 3px;
 }
 
-.schedule-item a:hover {
+.schedule-item button:hover {
     background-color: black;
     color: white;
 }
