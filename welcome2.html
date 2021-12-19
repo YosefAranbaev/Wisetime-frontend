@@ -53,7 +53,7 @@
     <main role="main" class="container">
         <div class="taskForm">
             <h1>Welcome to WiseTime!</h1>
-            <form action="http://127.0.0.1:5500/wisetime-frontend/home.html"  method="GET">
+            <form action="http://localhost:3000/api/users/61bf55f05cdd48c85bee8587/categories"  method="POST">
                 <label>Select preferred time of the day for the next categories:</label><br>
                 <section class="categoriesTime">
                     <section class="categories">
@@ -63,29 +63,29 @@
                         <p class="weekDay">Chores</p>
                     </section>
                     <section class="timeOfDay">
-                        <select>
-                            <option>Any</option>
-                            <option>Morning</option>
-                            <option>Day</option>
-                            <option>Evening</option>
+                        <select name="study">
+                            <option value="1">Any</option>
+                            <option value="2">Morning</option>
+                            <option value="3">Day</option>
+                            <option value="4">Evening</option>
                         </select>
-                        <select>
-                            <option>Any</option>
-                            <option>Morning</option>
-                            <option>Day</option>
-                            <option>Evening</option>
+                        <select name="work">
+                            <option value="1">Any</option>
+                            <option value="2">Morning</option>
+                            <option value="3">Day</option>
+                            <option value="4">Evening</option>
                         </select>
-                        <select>
-                            <option>Any</option>
-                            <option>Morning</option>
-                            <option>Day</option>
-                            <option>Evening</option>
+                        <select name="hobby">
+                            <option value="1">Any</option>
+                            <option value="2">Morning</option>
+                            <option value="3">Day</option>
+                            <option value="4">Evening</option>
                         </select>
-                        <select>
-                            <option>Any</option>
-                            <option>Morning</option>
-                            <option>Day</option>
-                            <option>Evening</option>
+                        <select name="chores">
+                            <option value="1">Any</option>
+                            <option value="2">Morning</option>
+                            <option value="3">Day</option>
+                            <option value="4">Evening</option>
                         </select>
                     </section>
                 </section>
