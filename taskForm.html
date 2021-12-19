@@ -29,9 +29,6 @@
                         <a href="./home.html" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item" data-turbolinks="false">
-                        <a href="./calendar.html" class="nav-link">Calendar</a>
-                    </li>
-                    <li class="nav-item" data-turbolinks="false">
                         <a href="./taskForm.html" class="nav-link active">Add Task</a>
                     </li>
                 </ul>
@@ -56,13 +53,13 @@
     <main role="main" class="container">
         <div class="taskForm">
             <form id="contact" action="http://localhost:3000/api/tasks" method="post">
-                <h3>Add Task</h3>
+                <h1>Add Task</h1>
 
                 <fieldset>
                     <input placeholder="Subject" type="text" tabindex="1" name="name">
                 </fieldset>
                 <fieldset>
-                    <label for="appt">Day of the week:</label><br>
+                    <label>Day of the week:</label><br>
                     <select name="day">
                         <option value="sunday">Sunday</option>
                         <option value="monday">Monday</option>
@@ -74,15 +71,11 @@
                     </select>
                 </fieldset>
                 <fieldset>
-                    <label for="appt">Start Time:</label><br>
-                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00">
-                </fieldset>
-                <fieldset>
-                    <label for="appt">End Time:</label><br>
+                    <label>Time:</label><br>
+                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00"> -
                     <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="00:00">
                 </fieldset>
                 <fieldset>
-                    <!-- <input type="color" name="color" value="#ffda24"> -->
                     <div class="radio-list">
                         <label class="radio">
                           <input class="radio-input" type="radio" name="color" value="green">
