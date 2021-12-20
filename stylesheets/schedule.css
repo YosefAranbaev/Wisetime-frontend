@@ -539,6 +539,40 @@ body {
     display: none;
 }
 
+/* Icons on the tasks */
+.schedule-item {
+    position: relative;
+}
+
+.schedule-item .icons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    background-color: white;
+    border-radius: 3px;
+    visibility: hidden;
+    opacity: 90%;
+}
+
+.schedule-item button {
+    color: black;
+    font-size: 8px;
+    margin: 1px;
+    padding: 1px;
+    border-radius: 3px;
+}
+
+.schedule-item button:hover {
+    background-color: black;
+    color: white;
+}
+
+.schedule-item:hover .icons {
+    visibility: visible;
+}
+
+
 @media (max-width: 800px) {
     .schedule {
         display: inline-grid;

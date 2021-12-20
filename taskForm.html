@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel='stylesheet' href='stylesheets/style.css' />
-    <link rel='stylesheet' href='stylesheets/taskForm.css' />
+    <link rel='stylesheet' href='stylesheets/forms.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./scripts/calendar.js"></script>
 </head>
@@ -27,9 +27,6 @@
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a href="./home.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item" data-turbolinks="false">
-                        <a href="./calendar.html" class="nav-link">Calendar</a>
                     </li>
                     <li class="nav-item" data-turbolinks="false">
                         <a href="./taskForm.html" class="nav-link active">Add Task</a>
@@ -56,25 +53,29 @@
     <main role="main" class="container">
         <div class="taskForm">
             <form id="contact" action="http://localhost:3000/api/tasks" method="post">
-                <h3>Add Task</h3>
+                <h1>Add Task</h1>
 
                 <fieldset>
                     <input placeholder="Subject" type="text" tabindex="1" name="name">
                 </fieldset>
                 <fieldset>
-                    <input type="date" id="start" name="day" value="2021-07-22" min="2000-01-01"
-                        max="2050-12-31">
+                    <label>Day of the week:</label><br>
+                    <select name="day">
+                        <option value="sunday">Sunday</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                    </select>
                 </fieldset>
                 <fieldset>
-                    <label for="appt">Start Time:</label><br>
-                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00">
-                </fieldset>
-                <fieldset>
-                    <label for="appt">End Time:</label><br>
+                    <label>Time:</label><br>
+                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00"> -
                     <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="00:00">
                 </fieldset>
                 <fieldset>
-                    <!-- <input type="color" name="color" value="#ffda24"> -->
                     <div class="radio-list">
                         <label class="radio">
                           <input class="radio-input" type="radio" name="color" value="green">
