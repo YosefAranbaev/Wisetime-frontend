@@ -52,7 +52,7 @@
     </nav>
     <main role="main" class="container">
         <div class="taskForm">
-            <form id="contact" action="http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks" method="post">
+            <form id="contact" action="" name="myForm" method="post" onsubmit="return check()">
                 <h1>Add Task</h1>
 
                 <fieldset>
@@ -65,7 +65,7 @@
                         <option value="monday">Monday</option>
                         <option value="tuesday">Tuesday</option>
                         <option value="wednesday">Wednesday</option>
-                        <option value="thursday">Thursday</option>
+                        <option value="tursday">Thursday</option>
                         <option value="friday">Friday</option>
                         <option value="saturday">Saturday</option>
                     </select>
@@ -106,6 +106,7 @@
                 <fieldset>
                     <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
                 </fieldset>
+                <p class="fileError"></p>
             </form>
         </div>
     </main>
