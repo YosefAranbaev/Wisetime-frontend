@@ -66,8 +66,8 @@ const hours = {
    "23:00":"tth",
 }
 
-const do_ = () => {
-   get_time_set().then(res => {
+const addTaskToSchedule = () => {
+   getTimelist().then(res => {
        const j = res.json().then(result => {
            console.log("dd"+result);
            console.log("08:01" < "09:00");
@@ -92,11 +92,11 @@ const do_ = () => {
    })
 }
 
-function sleep(ms) {
-   return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function sleep(ms) {
+//    return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
-const get_time_set = async () => {
+const getTimelist = async () => {
    try {
        const response = fetch('http://localhost:3000/api/tasks', { method: 'GET' })
        if (response) {
