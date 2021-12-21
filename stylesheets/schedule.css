@@ -566,6 +566,7 @@ body {
 .schedule-item button:hover {
     background-color: black;
     color: white;
+    opacity: 90%;
 }
 
 .schedule-item:hover .icons {

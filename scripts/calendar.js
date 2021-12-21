@@ -1,52 +1,13 @@
-// const displayEventsTable = (events) => {
-//     const tableStructure = `<thead>
-//                                 <tr>
-//                                     <th scope="col">Organizer</th>
-//                                     <th scope="col">Subject</th>
-//                                     <th scope="col">Start</th>
-//                                     <th scope="col">End</th>
-//                                 </tr>
-//                             </thead>
-//                             <tbody>
-//                             </tbody>`
-
-//     $('.table').append(tableStructure);
-
-//     events.forEach(event => {
-//         $('table tbody').append(
-//             `<tr>
-//                 <th> ${ event.organizer } </th>
-//                 <th> ${ event.subject } </th>
-//                 <th> ${ event.startDateTime } </th>
-//                 <th> ${ event.endDateTime } </th>
-//             </tr>`
-//         );
-//     });
-// };
-
-// const getAllEvents = () => {
-//     $.ajax({
-//         url: 'http://localhost:3000/api/calendar',
-//         type: 'GET',
-//         crossDomain: true,
-//         xhrFields: { withCredentials: true },
-//         //credentials: 'include',
-//         success: (events) => {
-//             displayEventsTable(events);
-//         }
-//     });
-// }
-
-// getAllEvents();
 const getColor = () => {
     if ($(".radio-input")[0].checked == true)
-        return "red";
-    if ($(".radio-input")[1].checked == true)
         return "green";
+    if ($(".radio-input")[1].checked == true)
+        return "red";
     if ($(".radio-input")[2].checked == true)
         return "yellow";
     if ($(".radio-input")[3].checked == true)
         return "blue";
+
 }
 const fileErrorTreatment = (err) => {
     console.log(err);
@@ -62,7 +23,7 @@ const fileErrorTreatment = (err) => {
     }
 }
 function check() {
-    const obj = "http://localhost:3000/api/tasks";
+    const obj = "http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks";
     const newTask = {
         "name": document.forms["myForm"]["name"].value,
         "day": document.forms["myForm"]["day"].value,
@@ -70,6 +31,7 @@ function check() {
         "hour_end_time": document.forms["myForm"]["hour_end_time"].value,
         "color": getColor()
     };
+
     const res = $.ajax({
         type: "POST",
         url: obj,

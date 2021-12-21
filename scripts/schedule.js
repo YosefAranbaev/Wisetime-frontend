@@ -82,7 +82,7 @@ const addTaskToSchedule = () => {
                + ' <div class="icons">'
                + ' <button title="Done" onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
                + ' <button title="Update" onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
-               + ' <button title="Delete" href="#myModal" class="trigger-btn" data-toggle="modal" onclick="deleteTask(this)"><i class="fas fa-times"></i></button>'
+               + ' <button title="Delete" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
                + ' </div>'
                + element.name
                + '</div>'
@@ -98,7 +98,7 @@ const addTaskToSchedule = () => {
 
 const getTimelist = async () => {
    try {
-       const response = fetch('http://localhost:3000/api/tasks', { method: 'GET' })
+       const response = fetch('http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks', { method: 'GET' })
        if (response) {
            const jsonRes = response;
            // console.log(response);
@@ -141,5 +141,5 @@ const updateTask = (task) => {
 };
 
 const deleteTask = (task) => {
-    
+
 };
