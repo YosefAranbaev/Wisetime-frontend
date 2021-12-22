@@ -12,7 +12,7 @@
     <link rel='stylesheet' href='stylesheets/style.css' />
     <link rel='stylesheet' href='stylesheets/forms.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./scripts/calendar.js"></script>
+    <script src="./scripts/validations.js"></script>
 </head>
 
 <body>
@@ -72,8 +72,8 @@
                 </fieldset>
                 <fieldset>
                     <label>Time:</label><br>
-                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="00:00"> -
-                    <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="00:00">
+                    <input type="time" id="appt" name="hour_start_time" value="07:00" min="07:00" max="23:00" step="900"> -
+                    <input type="time" id="appt" name="hour_end_time" value="12:00" min="07:00" max="23:00" step="900">
                 </fieldset>
                 <fieldset>
                     <div class="radio-list">

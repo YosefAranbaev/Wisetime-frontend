@@ -12,7 +12,8 @@
     <link rel='stylesheet' href='stylesheets/style.css' />
     <link rel='stylesheet' href='stylesheets/forms.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="./scripts/calendar.js"></script>
+    <script src="./scripts/validations.js"></script>
+    <script src="./scripts/categories.js"></script>
 </head>
 
 <body>
@@ -53,7 +54,7 @@
     <main role="main" class="container">
         <div class="taskForm">
             <h1>Welcome to WiseTime!</h1>
-            <form action="http://localhost:3000/api/users/61c1b960f3ac2475edc30492/categories"  method="POST">
+            <form action=""  method="POST" name="categoriesForm" onsubmit="return addCategories()">
                 <label>Select preferred time of the day for the next categories:</label><br>
                 <section class="categoriesTime">
                     <section class="categories">

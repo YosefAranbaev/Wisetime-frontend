@@ -10,20 +10,18 @@ const getColor = () => {
 
 }
 const fileErrorTreatment = (err) => {
-    console.log(err);
     $(".fileError").html("");
-    if (err == 401) {
+    if (err == 400) {
         $(".fileError").append("Please fill in all the fields on the form!");
     }
-    if (err == 403) {
+    if (err == 409) {
         $(".fileError").append("There is friction in the schedule. Please select another time!");
     }
-    if (err == 400) {
+    if (err == 500) {
         $(".fileError").append("Error getting the data from db");
-    }
+    } 
 }
 const check = () => {
-    const obj = "http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks";
     const newTask = {
         "name": document.forms["myForm"]["name"].value,
         "day": document.forms["myForm"]["day"].value,
@@ -34,7 +32,7 @@ const check = () => {
 
     const res = $.ajax({
         type: "POST",
-        url: obj,
+        url: "http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks",
         data: newTask,
         success:(res)=>{
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
@@ -43,8 +41,6 @@ const check = () => {
             fileErrorTreatment(response.status);
         }
     });
+
     return false;
-}
-const update = () => {
-  
 }
