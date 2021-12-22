@@ -64,6 +64,13 @@ const hours = {
    "22:30":"ttot",
    "22:45":"ttoff",
    "23:00":"tth",
+   "23:15":"tth",
+   "23:30":"tth",
+   "23:45":"tth",
+   "00:00":"tth",
+   "00:15":"tth",
+   "00:30":"tth",
+   "00:45":"tth",
 }
 
 const addTaskToSchedule = () => {
@@ -73,6 +80,7 @@ const addTaskToSchedule = () => {
            console.log("08:01" < "09:00");
            result.forEach(element => {
                console.log(element.hour_end_time);
+            if(element.is_done==false){
            $(".schedule").append(
                '<div class="schedule-item'
                + ' schedule-' + element.day
@@ -80,21 +88,19 @@ const addTaskToSchedule = () => {
                + ' time-to-' + hours[element.hour_end_time]
                + ' nt bg-' + element.color + '">'
                + ' <div class="icons">'
-               + ' <button title="Done" onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
-               + ' <button title="Update" onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
-               + ' <button title="Delete" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
+               + ' <button title="Done"' +`id=${element._id} ` + 'onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
+               + ' <button title="Update"'+`id=${element._id} ` +'onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
+               + ' <button title="Delete"'+`id=${element._id} ` +' onclick="deleteTask(this)" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
                + ' </div>'
                + element.name
                + '</div>'
-           )
+           )}
            })
        });
    })
+   .catch(err => { res.status(400); res.json(`Error getting the data from db: ${err}`) });
 }
 
-// function sleep(ms) {
-//    return new Promise(resolve => setTimeout(resolve, ms));
-// }
 
 const getTimelist = async () => {
    try {
@@ -111,35 +117,42 @@ const getTimelist = async () => {
        return false;
    }
 }
-//     console.log("jjj");
-//     fetch('/api/tasks', {
-//         method: 'GET'
-//     }).then(response => response.json())
-//         .then(async (result) => {
-//             console.log("iii");
-//             // console.log(result[2]);
-//             return await result[2];
-//         }).catch(error => {
-//             console.error('Error:', error);
-//         });
-// }
-// const do1_ = () => {
-//     get_time_set().then(res => {
-//         console.log(res)
-//         const j = res.json().then(result => { console.log(result[2]); });
-//         console.log(j);
-//     })
-// }
-// do1_();
-
 const doneTask = (task) => {
+    console.log("did");
+    const obj = `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`;
+    const didTask = {
+        "is_done": true
+    };
 
-};
-
-const updateTask = (task) => {
-
+    const res = $.ajax({
+        type: "PUT",
+        url: obj,
+        data: didTask,
+        success:(res)=>{
+            console.log("did");
+            window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
+        },
+        error: (response) => {
+            fileErrorTreatment(response.status);
+        }
+    });
 };
 
 const deleteTask = (task) => {
-
+    const obj = `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`;
+    $("#deleteTaskbutton").on("click",function()
+    {
+       console.log(task.id);
+       const res = $.ajax({
+        type: "DELETE",
+        url: obj,
+        success:(res)=>{
+            // console.log("did");
+            window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
+        },
+        error: (response) => {
+            fileErrorTreatment(response.status);
+        }
+    });
+    })
 };
