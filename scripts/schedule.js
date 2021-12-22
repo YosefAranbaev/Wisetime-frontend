@@ -74,62 +74,47 @@ const hours = {
 }
 
 const addTaskToSchedule = () => {
-   getTimelist().then(res => {
-       const j = res.json().then(result => {
-           console.log("dd"+result);
-           console.log("08:01" < "09:00");
-           result.forEach(element => {
-               console.log(element.hour_end_time);
-            if(element.is_done==false){
-           $(".schedule").append(
-               '<div class="schedule-item'
-               + ' schedule-' + element.day
-               + ' time-from-' + hours[element.hour_start_time]
-               + ' time-to-' + hours[element.hour_end_time]
-               + ' nt bg-' + element.color + '">'
-               + ' <div class="icons">'
-               + ' <button title="Done"' +`id=${element._id} ` + 'onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
-               + ' <button title="Update"'+`id=${element._id} ` +'onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
-               + ' <button title="Delete"'+`id=${element._id} ` +' onclick="deleteTask(this)" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
-               + ' </div>'
-               + element.name
-               + '</div>'
-           )}
-           })
+    getTimelist().then(res => {
+        res.json().then(result => {
+            result.forEach(element => {
+                if(!element.is_done){
+                    $(".schedule").append(
+                        `<div class="schedule-item schedule-${element.day} time-from-${hours[element.hour_start_time]} time-to-${hours[element.hour_end_time]} nt bg-${element.color}">
+                            <div class="icons">
+                                <button title="Done" id=${element._id} onclick="doneTask(this)"><i class="fas fa-check"></i></button>
+                                <button title="Update" id=${element._id}"><i class="fas fa-pen"></i></button>
+                                <button title="Delete" id=${element._id} onclick="deleteTask(this)"><i class="fas fa-times"></i></button>
+                            </div>
+                        ${element.name}
+                        </div>`
+                    )              
+                }
+            })
        });
-   })
-   .catch(err => { res.status(400); res.json(`Error getting the data from db: ${err}`) });
+   });
 }
-
 
 const getTimelist = async () => {
-   try {
-       const response = fetch('http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks', { method: 'GET' })
+    try {
+        const response = fetch('http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks', 
+            { method: 'GET' }
+        );
+
        if (response) {
-           const jsonRes = response;
-           // console.log(response);
-           return jsonRes;
+           return response;
        }
        return false;
-   }
-   catch (e) {
-       console.log("fetch failed", e);
+   } catch (e) {
        return false;
    }
 }
-const doneTask = (task) => {
-    console.log("did");
-    const obj = `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`;
-    const didTask = {
-        "is_done": true
-    };
 
+const doneTask = (task) => {
     const res = $.ajax({
         type: "PUT",
-        url: obj,
-        data: didTask,
+        url: `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`,
+        data: { "is_done": true },
         success:(res)=>{
-            console.log("did");
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
         },
         error: (response) => {
@@ -139,20 +124,14 @@ const doneTask = (task) => {
 };
 
 const deleteTask = (task) => {
-    const obj = `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`;
-    $("#deleteTaskbutton").on("click",function()
-    {
-       console.log(task.id);
-       const res = $.ajax({
+    $.ajax({
         type: "DELETE",
-        url: obj,
+        url: `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`,
         success:(res)=>{
-            // console.log("did");
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
         },
         error: (response) => {
             fileErrorTreatment(response.status);
         }
     });
-    })
 };
