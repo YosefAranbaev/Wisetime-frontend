@@ -22,7 +22,7 @@ const fileErrorTreatment = (err) => {
         $(".fileError").append("Error getting the data from db");
     }
 }
-function check() {
+const check = () => {
     const obj = "http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks";
     const newTask = {
         "name": document.forms["myForm"]["name"].value,
@@ -44,4 +44,7 @@ function check() {
         }
     });
     return false;
+}
+const update = () => {
+  
 }
