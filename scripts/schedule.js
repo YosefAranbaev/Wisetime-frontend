@@ -66,28 +66,53 @@ const hours = {
    "23:00":"tth",
 }
 
+const addModal = (taskId) => {
+    const modal = `<div id="${taskId}" class="modal fade">
+                    <div class="modal-dialog modal-confirm">
+                        <div class="modal-content">
+                            <div class="modal-header flex-column">
+                                <div class="icon-box">
+                                    <i class="material-icons">&#xE5CD;</i>
+                                </div>
+                                <h4 class="modal-title w-100">Are you sure?</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Do you really want to delete this Task?</p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="deleteTask(${taskId})">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+    $('#modalsList').append(modal);
+}
+
 const addTaskToSchedule = () => {
    getTimelist().then(res => {
        const j = res.json().then(result => {
-           console.log("dd"+result);
-           console.log("08:01" < "09:00");
-           result.forEach(element => {
-               console.log(element.hour_end_time);
-           $(".schedule").append(
-               '<div class="schedule-item'
-               + ' schedule-' + element.day
-               + ' time-from-' + hours[element.hour_start_time]
-               + ' time-to-' + hours[element.hour_end_time]
-               + ' nt bg-' + element.color + '">'
-               + ' <div class="icons">'
-               + ' <button title="Done" onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
-               + ' <button title="Update" onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
-               + ' <button title="Delete" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
-               + ' </div>'
-               + element.name
-               + '</div>'
-           )
-           })
+            console.log("dd"+result);
+            console.log("08:01" < "09:00");
+            result.forEach(element => {
+                $(".schedule").append(
+                    '<div class="schedule-item'
+                    + ' schedule-' + element.day
+                    + ' time-from-' + hours[element.hour_start_time]
+                    + ' time-to-' + hours[element.hour_end_time]
+                    + ' nt bg-' + element.color + '">'
+                    + ' <div class="icons">'
+                    + ' <button title="Done" onclick="doneTask(this)"><i class="fas fa-check"></i></button>'
+                    + ' <button title="Update" onclick="updateTask(this)"><i class="fas fa-pen"></i></button>'
+                    + ' <button title="Delete" href="#' + element._id + '" class="trigger-btn" data-toggle="modal"><i class="fas fa-times"></i></button>'
+                    + ' </div>'
+                    + element.name
+                    + '</div>'
+                )
+                addModal(element._id);
+            })
        });
    })
 }
