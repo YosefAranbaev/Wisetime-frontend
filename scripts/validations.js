@@ -32,7 +32,7 @@ const check = () => {
 
     const res = $.ajax({
         type: "POST",
-        url: "http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks",
+        url: "http://wisetime.herokuapp.com/api/users/61c1b960f3ac2475edc30492/tasks",
         data: newTask,
         success:(res)=>{
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";

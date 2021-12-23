@@ -40,7 +40,6 @@ fieldset {
 #contact input[type="tel"],
 #contact input[type="url"],
 #contact textarea {
-  width: 100%;
   border: 1px solid #ccc;
   background: #FFF;
   margin: 0 0 5px;
@@ -224,7 +223,7 @@ button[type="submit"]:active {
 .ui-timepicker {
     list-style: none;
     padding: 0 1px;
-    text-align: center
+    text-align: center;
 }
 
 .ui-timepicker-viewport {
@@ -277,3 +276,17 @@ button[type="submit"]:active {
 .ui-timepicker-no-scrollbar .ui-timepicker {
     border: none
 }
+
+.timerange {
+  display: flex;
+  justify-content: space-between;
+}
+
+input.timepicker {
+  width: 160px;
+}
+
+.subject {
+  width: 100%;
+}
+

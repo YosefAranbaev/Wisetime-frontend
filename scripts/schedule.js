@@ -83,7 +83,7 @@ const addTaskToSchedule = () => {
                             <div class="icons">
                                 <button title="Done" id=${element._id} onclick="doneTask(this)"><i class="fas fa-check"></i></button>
                                 <button title="Update" id=${element._id}"><i class="fas fa-pen"></i></button>
-                                <button title="Delete" id=${element._id} onclick="deleteTask(this)"><i class="fas fa-times"></i></button>
+                                <button title="Delete" id=${element._id} onclick="deleteTask(this)" href="#myModal" class="trigger-btn" data-toggle="modal"><i class="fas fa-times""></i></button>
                             </div>
                         ${element.name}
                         </div>`
@@ -96,7 +96,7 @@ const addTaskToSchedule = () => {
 
 const getTimelist = async () => {
     try {
-        const response = fetch('http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks', 
+        const response = fetch('http://wisetime.herokuapp.com/api/users/61c1b960f3ac2475edc30492/tasks', 
             { method: 'GET' }
         );
 
@@ -112,7 +112,7 @@ const getTimelist = async () => {
 const doneTask = (task) => {
     const res = $.ajax({
         type: "PUT",
-        url: `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`,
+        url: `http://wisetime.herokuapp.com/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`,
         data: { "is_done": true },
         success:(res)=>{
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
@@ -124,9 +124,13 @@ const doneTask = (task) => {
 };
 
 const deleteTask = (task) => {
-    $.ajax({
+
+    const url = `http://wisetime.herokuapp.com/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`;
+    $("#deleteTaskbutton").on("click",function()
+    {
+       const res = $.ajax({
         type: "DELETE",
-        url: `http://localhost:3000/api/users/61c1b960f3ac2475edc30492/tasks/${task.id}`,
+        url: url,
         success:(res)=>{
             window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
         },
@@ -134,4 +138,5 @@ const deleteTask = (task) => {
             fileErrorTreatment(response.status);
         }
     });
+    })
 };
