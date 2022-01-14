@@ -2,7 +2,8 @@ import React from 'react';
 import Login from '../Components/Login';
 import Logup from '../Components/Logup';
 import Home from '../Components/Home';
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
+import { getCurrentUser } from '../Utils/Service';
 
 const ReactRouter = () => {
     return (
@@ -12,7 +13,9 @@ const ReactRouter = () => {
                 <Logup />
             </Route>
             <Route exact path='/home'>
-                <Home />
+                {
+                    getCurrentUser() ? <Home /> : <Redirect to='/' />
+                }
             </Route>
         </>
     )
