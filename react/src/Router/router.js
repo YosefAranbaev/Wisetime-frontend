@@ -1,5 +1,6 @@
 import React from 'react';
 import Login from '../Components/Login';
+import Logup from '../Components/Logup';
 import Home from '../Components/Home';
 import { Route } from 'react-router-dom'
 
@@ -8,6 +9,7 @@ const ReactRouter = () => {
         <>
             <Route exact path='/'>
                 <Login />
+                <Logup />
             </Route>
             <Route exact path='/home'>
                 <Home />
