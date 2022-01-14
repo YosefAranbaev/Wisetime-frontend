@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 
 const serviceUrl = 'http://localhost:8080';
 
 const Login = () => {
+    let history = useHistory();
 
     const handleLogin = () => {
         fetch(`${serviceUrl}/api/auth/signin`, {
@@ -18,7 +20,13 @@ const Login = () => {
         })
         .then((response) => {
             if(response.ok) {
-                alert('ok');
+                response.json()
+                .then(response => {
+                    if(response.accessToken) {
+                        localStorage.setItem('user', JSON.stringify(response));
+                        history.push('/home');
+                    }
+                })
             } else if(response.status === 401) {
                 alert('Invalid password');
             } else if(response.status === 500) {
