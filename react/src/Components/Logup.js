@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 const serviceUrl = 'http://localhost:8080';
 
-const Logup = () => {
+const Logup = (props) => {
     let history = useHistory();
 
     const handleLogup = () => {
@@ -25,6 +25,7 @@ const Logup = () => {
                 .then(response => {
                     if(response.accessToken) {
                         localStorage.setItem('user', JSON.stringify(response));
+                        props.updateUser(JSON.stringify(response));
                         history.push('/home');
                     }
                 })

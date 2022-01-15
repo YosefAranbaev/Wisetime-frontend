@@ -1,22 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Login from '../Components/Login';
 import Logup from '../Components/Logup';
 import Home from '../Components/Home';
-import { Route, Redirect } from 'react-router-dom'
-import { getCurrentUser } from '../Utils/Service';
+import PrivateRouter from './privateRouter';
+import { Route } from 'react-router-dom'
 
 const ReactRouter = () => {
+    const [user, setUser] = useState({});
+
     return (
         <>
             <Route exact path='/'>
-                <Login />
-                <Logup />
+                <Login updateUser={userInfo => setUser(userInfo)} />
+                <Logup updateUser={userInfo => setUser(userInfo)} />
             </Route>
-            <Route exact path='/home'>
-                {
-                    getCurrentUser() ? <Home /> : <Redirect to='/' />
-                }
-            </Route>
+
+            <PrivateRouter path='/home' component={Home} user={user} />
         </>
     )
 }
