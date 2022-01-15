@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { getTasks } from '../Utils/contentService';
-import axios from 'axios';
-
-import { getCurrentUser, authHeader } from '../Utils/Service';
-
-const serviceUrl = 'http://localhost:8080';
 
 const Home = () => {
     let history = useHistory();
