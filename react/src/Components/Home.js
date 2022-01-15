@@ -6,11 +6,6 @@ const Home = () => {
     let history = useHistory();
     const [tasks, setTasks] = useState([]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        history.push('/');
-    };
-
     useEffect(() => {
         getTasks().then(response => {
             const tasksData = JSON.stringify(response.data);
@@ -20,9 +15,7 @@ const Home = () => {
 
     return ( 
         <div className='home'>
-            <h1>Homepage</h1>
-            <button onClick={ handleLogout }>Logout</button>
-            <h3>Tasks</h3>
+            <h1>Week Schedule</h1>
             { tasks }
         </div>
     );
