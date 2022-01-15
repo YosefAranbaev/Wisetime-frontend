@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
+import { MdKeyboardArrowDown } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import SideMenu from './SideMenu';
@@ -35,10 +36,10 @@ const Header = (props) => {
         },
         avatar: {
             height: '100%',
-            width: '60px',
+            width: '40px',
             backgroundImage: 'url("no-profile-photo.png")',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: '10px center',
+            backgroundPosition: '3px center',
             position: 'relative',
             cursor: 'pointer'
         },
@@ -80,6 +81,12 @@ const Header = (props) => {
             right: '1px',
             border: '1px solid #fff',
             display: 'block'
+        },
+        arrow: {
+            marginTop: '20px',
+            marginRight: '15px',
+            color: '#707070',
+            cursor: 'pointer'
         }
     }
 
@@ -110,6 +117,7 @@ const Header = (props) => {
                                 showSideMenu ? <SideMenu /> : null
                             }
                         </div>
+                        <MdKeyboardArrowDown style={styles.arrow} onClick={() => setShowSideMenu(!showSideMenu)} />
                     </div>
                 </>
     }

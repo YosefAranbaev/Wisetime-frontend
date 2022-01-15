@@ -10,7 +10,7 @@ const SideMenu = (props) => {
             height: 'auto',
             position: 'absolute',
             top: '60px',
-            right: '5px',
+            right: '-14px',
             backgroundColor: '#fff',
             boxShadow:' 0px 2px 6px rgba(0, 0, 0, 0.1)',
             display: 'flex',
@@ -28,7 +28,6 @@ const SideMenu = (props) => {
 
     const handleLogout = () => {
         localStorage.removeItem('user');
-        // history.push('/');
     };
 
     return ( 

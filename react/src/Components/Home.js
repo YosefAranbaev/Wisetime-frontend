@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { getTasks } from '../Utils/contentService';
+import { Card } from '@mui/material';
+import Heading from './Heading';
 
 const Home = () => {
+    const styles = {
+        content: {
+
+        }
+    }
+
     let history = useHistory();
     const [tasks, setTasks] = useState([]);
 
@@ -14,8 +22,8 @@ const Home = () => {
     }, []);
 
     return ( 
-        <div className='home'>
-            <h1>Week Schedule</h1>
+        <div className='home' style={styles.content}>
+            <Heading heading='Week Schedule' />
             { tasks }
         </div>
     );
