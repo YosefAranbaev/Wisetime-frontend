@@ -1,46 +1,130 @@
-import React from 'react';
+import React, { useState, useRef } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 import { useHistory } from "react-router-dom";
 
-const serviceUrl = 'http://localhost:8080';
+import AuthService from "../services/auth.service";
+
+const required = (value) => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
 
 const Login = (props) => {
-    let history = useHistory();
+  const styles = {
+    card: {
+      backgroundColor: '#fff',
+      boxShadow:' 2px 2px 2px rgba(0, 0, 0, 0.1)',
+      borderRadius: '10px',
+      border: 'none'
+    }
+  }
 
-    const handleLogin = () => {
-        fetch(`${serviceUrl}/api/auth/signin`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'email': 'karina@gmail.com',
-                'password': '111'
-            })
-        })
-        .then((response) => {
-            if(response.ok) {
-                response.json()
-                .then(response => {
-                    if(response.accessToken) {
-                        localStorage.setItem('user', JSON.stringify(response));
-                        props.updateUser(JSON.stringify(response));
-                        history.push('/home');
-                    }
-                })
-            } else if(response.status === 401) {
-                alert('Invalid password');
-            } else if(response.status === 500) {
-                alert('Invalid email');
-            }    
-        })
-    };
 
-    return ( 
-        <div className='login'>
-            <button onClick={ handleLogin }>Login</button>
-        </div>
-    );
-}
- 
+  const form = useRef();
+  const checkBtn = useRef();
+  const history = useHistory();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const onChangeEmail = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+  };
+
+  const onChangePassword = (e) => {
+    const password = e.target.value;
+    setPassword(password);
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    setMessage("");
+    setLoading(true);
+
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(email, password).then(
+        () => {
+          history.push("/schedule");
+          window.location.reload();
+        },
+        (error) => {
+          setLoading(false);
+          setMessage('Invalid email or password');
+        }
+      );
+    } else {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="col-md-12">
+      <div className="card card-container" style={styles.card}>
+        <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="profile-img-card"
+        />
+
+        <Form onSubmit={handleLogin} ref={form}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <Input
+              type="text"
+              className="form-control"
+              name="email"
+              value={email}
+              onChange={onChangeEmail}
+              validations={[required]}
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <Input
+              type="password"
+              className="form-control"
+              name="password"
+              value={password}
+              onChange={onChangePassword}
+              validations={[required]}
+            />
+          </div>
+
+          <div className="form-group">
+            <button className="btn btn-primary btn-block" disabled={loading}>
+              {loading && (
+                <span className="spinner-border spinner-border-sm"></span>
+              )}
+              <span>Login</span>
+            </button>
+          </div>
+
+          {message && (
+            <div className="form-group">
+              <div className="alert alert-danger" role="alert">
+                {message}
+              </div>
+            </div>
+          )}
+          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+        </Form>
+      </div>
+    </div>
+  );
+};
+
 export default Login;

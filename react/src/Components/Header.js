@@ -51,14 +51,14 @@ const Header = (props) => {
         },
         notificationIcon: {
             color: '#707070',
-            marginTop: '20px',
+            marginTop: '12px',
             marginRight: '20px',
             fontSize: '20px',
             position: 'relative'
         },
         notificationIconActive: {
             color: '#9966CC',
-            marginTop: '20px',
+            marginTop: '12px',
             marginRight: '20px',
             fontSize: '20px',
             position: 'relative'
@@ -77,8 +77,8 @@ const Header = (props) => {
             borderRadius: '50px',
             backgroundColor: '#D80000',
             position: 'absolute',
-            top: '3px',
-            right: '1px',
+            top: '11px',
+            right: '3px',
             border: '1px solid #fff',
             display: 'block'
         },
@@ -87,6 +87,10 @@ const Header = (props) => {
             marginRight: '15px',
             color: '#707070',
             cursor: 'pointer'
+        },
+        list: {
+            display: 'flex',
+            justifyContent: 'center'
         }
     }
 
@@ -94,40 +98,46 @@ const Header = (props) => {
     const [showDot, setShowDot] = useState(true);
     const [showSideMenu, setShowSideMenu] = useState(false);
 
-    useEffect(() => {
-        if(location.pathname === 'notifications') {
-            setShowDot(false);
-        }
-    }, [location.pathname])
-
-    const renderHeader = () => {
-        return  <>
-                    <nav id='mainMenu'>
-                        <Link to='/home' style={location.pathname === '/home' ? styles.linkActive : styles.link}>Home</Link>
+    return(
+        <nav className='Header' style={styles.header}>
+            <Link to='#' id='logo' style={styles.logo}>WiseTime</Link>
+            <div>
+                {props.currentUser && (
+                    <li className="nav-item" style={styles.list}>
+                        <Link to='/schedule' style={location.pathname === '/schedule' ? styles.linkActive : styles.link}>Schedule</Link>
                         <Link to='/statistics' style={location.pathname === '/statistics' ? styles.linkActive : styles.link}>Statistics</Link>
-                    </nav>
-                    <div className='profile' style={styles.profile}>
-                        <Link to='/notifications' style={location.pathname === '/notifications' ? styles.notificationIconActive : styles.notificationIcon}>
+                    </li>
+                )}
+            </div>
+            <div className='profile' style={styles.profile}>
+                {props.currentUser && (
+                    <li className="nav-item" style={styles.list}>
+                        <Link to='/inbox' style={location.pathname === '/inbox' ? styles.notificationIconActive : styles.notificationIcon}>
                             <IoIosNotifications />
                             <div style={showDot ? styles.dot : {}}></div>
                         </Link>
-                        <p style={styles.profileName}>{JSON.parse(localStorage.getItem("user")).username}</p>
+                        <p style={styles.profileName}>{props.currentUser.username}</p>
                         <div className='avatar' style={styles.avatar} onClick={() => setShowSideMenu(!showSideMenu)}>
                             {
-                                showSideMenu ? <SideMenu /> : null
+                                showSideMenu ? <SideMenu logOut={props.logOut} /> : null
                             }
                         </div>
                         <MdKeyboardArrowDown style={styles.arrow} onClick={() => setShowSideMenu(!showSideMenu)} />
-                    </div>
-                </>
-    }
-
-    return ( 
-        <div className='Header' style={styles.header}>
-            <Link to='/home' id='logo' style={styles.logo}>WiseTime</Link>
-            { props.mode === 'protectedHeader' ? renderHeader() : null }
-        </div>
-    );
+                    </li>
+                )}
+            </div>
+            {!props.currentUser && location.pathname === '/register' && (
+                <Link to={"/"} className="nav-link">
+                    Login
+                </Link>
+            )}
+            {!props.currentUser && location.pathname === '/' && (
+                <Link to={"/register"} className="nav-link">
+                    Sign Up
+                </Link>
+            )}
+        </nav>
+    )
 }
  
 export default Header;

@@ -33,7 +33,7 @@ const SideMenu = (props) => {
     return ( 
         <div className='sideMenu' style={styles.menu}>
             <Link to='/profile' style={styles.link}>Profile</Link>
-            <Link to='/' style={styles.link} onClick={handleLogout}>Logout</Link>
+            <Link to='/' style={styles.link} onClick={props.logOut}>Logout</Link>
         </div>
     );
 }

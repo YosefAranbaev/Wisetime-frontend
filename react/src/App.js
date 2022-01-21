@@ -1,41 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
-import Header from './Components/Header';
+import React, { useState, useEffect } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
-const App = ({ children, props }) => {
-    const styles = {
-        wrapper: {
-            margin: '30px 30px 0 30px',
-            backgroundColor: '#fff',
-            boxShadow:' 2px 2px 2px rgba(0, 0, 0, 0.1)',
-            padding: '20px',
-            borderRadius: '10px',
-            minHeight: '71vh',
-            overflow: 'hidden',
-        }
+import AuthService from "./services/auth.service";
+
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Profile from "./components/Profile";
+import Schedule from "./components/Schedule";
+import Header from './components/Header';
+
+// import AuthVerify from "./common/AuthVerify";
+import EventBus from "./common/EventBus";
+
+const App = () => {
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
     }
 
-    const location = useLocation();
-    const [headerMode, setHeaderMode] = useState('publicHeader');
+    EventBus.on("logout", () => {
+      logOut();
+    });
 
-    useEffect(() => {
-        if(location.pathname === '/') {
-            setHeaderMode('publicHeader');
-        } else {
-            setHeaderMode('protectedHeader');
-        }
-    }, [location.pathname])
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, []);
 
-    return ( 
-        <div className='App'>
-            <Header mode={headerMode} />
-            <div id='wrapper' style={styles.wrapper}>
-                {React.Children.map(children, child => {
-                    return React.cloneElement(child)
-                })}
-            </div>
-        </div>
-    );
-}
- 
+  const logOut = () => {
+    AuthService.logout();
+    setCurrentUser(undefined);
+  };
+
+  return (
+    <div>
+      <Header currentUser={currentUser} logOut={logOut} />
+
+      <div className="container mt-3">
+        <Switch>
+          <Route exact path='/' component={() => <Login currentUser={currentUser} />} />
+          <Route exact path='/register' component={() => <Register currentUser={currentUser} />} />
+          <Route exact path='/profile' component={() => <Profile currentUser={currentUser} />} />
+          <Route path='/schedule' component={() => <Schedule currentUser={currentUser} />} />
+        </Switch>
+      </div>
+
+      {/* <AuthVerify logOut={logOut}/> */}
+    </div>
+  );
+};
+
 export default App;
