@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
 import Heading from './Heading';
+import AuthService from '../services/auth.service';
 
 const Schedule = (props) => {
   const styles = {
@@ -15,11 +16,13 @@ const Schedule = (props) => {
         overflow: 'hidden',
     }
   }
+
+  const user = AuthService.getCurrentUser();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    if(props.currentUser) {
-      UserService.getTasks(props.currentUser.id).then(
+    if(user) {
+      UserService.getTasks(user.id).then(
         (response) => {
           setTasks(response.data);
         },
