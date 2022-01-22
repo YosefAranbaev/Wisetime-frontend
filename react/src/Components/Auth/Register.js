@@ -4,8 +4,11 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { useHistory } from "react-router-dom";
+import swal from 'sweetalert2';
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
+
+window.Swal = swal;
 
 const required = (value) => {
   if (!value) {
@@ -93,8 +96,20 @@ const Register = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(username, email, password).then(
         () => {
-          history.push("/schedule");
-          window.location.reload();
+          history.push("/preferences");
+          swal.fire({
+            title: 'Welcome to WiseTime!',
+            text: 'Manage your preferences for better experience',
+            width: 600,
+            padding: '3em',
+            color: '#000',
+            backdrop: `
+                        rgba(0,0,123,0.4)
+                        url("https://sweetalert2.github.io/images/nyan-cat.gif")
+                        left top
+                        no-repeat
+                      `
+          })
         },
         (error) => {
           const resMessage =

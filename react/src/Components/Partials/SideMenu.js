@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation, useHistory } from "react-router-dom";
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import AuthService from '../../services/auth.service';
 
 const SideMenu = (props) => {
 
@@ -24,16 +25,10 @@ const SideMenu = (props) => {
         }
     }
 
-    const history = useHistory();
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-    };
-
     return ( 
         <div className='sideMenu' style={styles.menu}>
             <Link to='/profile' style={styles.link}>Profile</Link>
-            <Link to='/' style={styles.link} onClick={props.logOut}>Logout</Link>
+            <Link to='/' style={styles.link} onClick={AuthService.logout}>Logout</Link>
         </div>
     );
 }

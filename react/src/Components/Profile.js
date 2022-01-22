@@ -1,5 +1,7 @@
 import React from "react";
-import Heading from './Heading';
+import { Link } from 'react-router-dom';
+
+import Heading from './Partials/Heading';
 import AuthService from '../services/auth.service';
 
 const Profile = (props) => {
@@ -19,6 +21,12 @@ const Profile = (props) => {
       minHeight: '71vh',
       overflow: 'hidden',
       backgroundColor: '#f5f5f5'
+    },
+    button: {
+      border: 'none',
+      borderRadius: '10px',
+      padding: '9px',
+      backgroundColor: '#e7e7e7'
     }
   }
 
@@ -28,11 +36,8 @@ const Profile = (props) => {
     <div className="profileContainer" style={styles.profileContainer}>
       <Heading heading='Profile' />
       <p><b>Username:</b> {user.username}</p>
-      <p><b>Email:</b> {user.email}</p>
-
-      <div className="constraintsContainer" style={styles.constraintsContainer}>
-        <Heading heading='Manage Constraints' />
-      </div>
+      <p><b>Email:</b> {user.email}</p><br/>
+      <Link to='/preferences' style={styles.button}>Manage personal preferences</Link>
     </div>
   );
 };

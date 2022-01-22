@@ -4,7 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { useHistory } from "react-router-dom";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
 const required = (value) => {
   if (!value) {
@@ -25,7 +25,6 @@ const Login = (props) => {
       border: 'none'
     }
   }
-
 
   const form = useRef();
   const checkBtn = useRef();
