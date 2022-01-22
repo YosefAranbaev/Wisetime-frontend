@@ -29,7 +29,6 @@ const Preferences = (props) => {
       <button onClick={() =>setDisplay('categories')}>Categories</button>
       {
         display === 'constraints' ? <Constraints /> : <Categories />
-        // <Categories />
       }
     </div>
   );

@@ -2,18 +2,10 @@ import React, { useState, useEffect } from "react";
 
 import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
+import Category from './Category.js';
 
 const Categories = (props) => {
   const styles = {
-    workingTimePerDay: {
-      display: 'flex'
-    },
-    timeRanges: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around',
-      margin: '-8px 0 0 10px'
-    },
     button: {
       marginTop: '20px',
       border: '1px solid green',
@@ -21,25 +13,21 @@ const Categories = (props) => {
       color: '#fff',
       padding: '10px 20px',
       borderRadius: '10px'
-    },
-    categoriesTime: {
-      display: 'flex'
-    },
-    timeOfDay: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'spaceAround'
     }
   }
 
   const user = AuthService.getCurrentUser();
 
   return (
-    <form action="" method="POST" name="constraintsForm" onSubmit='return addConstraints()'>
+    <form action="" method="POST" name="constraintsForm">
         <label>Select preferred time of the day for the next categories:</label><br/>
 
-        <section class="categoriesTime" style={styles.categoriesTime}>
-          {/* <Category category='Study' /> */}
+        <section className="categoriesTime" style={styles.categoriesTime}>
+          <Category name='Study' />
+          <Category name='Work' />
+          <Category name='Hobby' />
+          <Category name='Chores' />
+          <Category name='Other' />
         </section>
 
         <button style={styles.button} name="submit" type="submit">Save Categories</button>
