@@ -13,7 +13,7 @@ const Router = (props) => {
         <Route exact path='/' component={() => <Login />} />
         <Route exact path='/register' component={() => <Register />} />
         <Route exact path='/profile' component={() => <Profile />} />
-        <Route path='/schedule' component={() => <Schedule logOut={props.logOut} />} />
+        <Route path='/schedule' component={() => <Schedule />} />
     </Switch>
   );
 };

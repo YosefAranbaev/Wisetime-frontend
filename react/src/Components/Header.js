@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { IoIosNotifications } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import SideMenu from './SideMenu';
+import AuthService from '../services/auth.service';
 
 const Header = (props) => {
 
@@ -95,6 +96,7 @@ const Header = (props) => {
     }
 
     const location = useLocation();
+    const user = AuthService.getCurrentUser();
     const [showDot, setShowDot] = useState(true);
     const [showSideMenu, setShowSideMenu] = useState(false);
 
@@ -102,7 +104,7 @@ const Header = (props) => {
         <nav className='Header' style={styles.header}>
             <Link to='#' id='logo' style={styles.logo}>WiseTime</Link>
             <div>
-                {props.currentUser && (
+                {user && (
                     <li className="nav-item" style={styles.list}>
                         <Link to='/schedule' style={location.pathname === '/schedule' ? styles.linkActive : styles.link}>Schedule</Link>
                         <Link to='/statistics' style={location.pathname === '/statistics' ? styles.linkActive : styles.link}>Statistics</Link>
@@ -110,28 +112,28 @@ const Header = (props) => {
                 )}
             </div>
             <div className='profile' style={styles.profile}>
-                {props.currentUser && (
+                {user && (
                     <li className="nav-item" style={styles.list}>
                         <Link to='/inbox' style={location.pathname === '/inbox' ? styles.notificationIconActive : styles.notificationIcon}>
                             <IoIosNotifications />
                             <div style={showDot ? styles.dot : {}}></div>
                         </Link>
-                        <p style={styles.profileName}>{props.currentUser.username}</p>
+                        <p style={styles.profileName}>{user.username}</p>
                         <div className='avatar' style={styles.avatar} onClick={() => setShowSideMenu(!showSideMenu)}>
                             {
-                                showSideMenu ? <SideMenu logOut={props.logOut} /> : null
+                                showSideMenu ? <SideMenu /> : null
                             }
                         </div>
                         <MdKeyboardArrowDown style={styles.arrow} onClick={() => setShowSideMenu(!showSideMenu)} />
                     </li>
                 )}
             </div>
-            {!props.currentUser && location.pathname === '/register' && (
+            {!user && location.pathname === '/register' && (
                 <Link to={"/"} className="nav-link">
                     Login
                 </Link>
             )}
-            {!props.currentUser && location.pathname === '/' && (
+            {!user && location.pathname === '/' && (
                 <Link to={"/register"} className="nav-link">
                     Sign Up
                 </Link>

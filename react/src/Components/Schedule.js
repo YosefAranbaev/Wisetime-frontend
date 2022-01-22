@@ -37,7 +37,7 @@ const Schedule = (props) => {
             setTasks(content);
   
           if (error.response && error.response.status === 401) {
-            props.logOut();
+            AuthService.logout();
           }
         }
       );
