@@ -65,7 +65,9 @@ const Header = (props) => {
             position: 'relative'
         },
         link: {
-            margin: '20px'
+            margin: '20px',
+            borderBottom: '2px solid #fff',
+            paddingBottom: '3px'
         },
         linkActive: {
             margin: '20px',
@@ -92,6 +94,24 @@ const Header = (props) => {
         list: {
             display: 'flex',
             justifyContent: 'center'
+        },
+        buttonActive: {
+            backgroundColor: '#9966CC',
+            marginLeft: '16px',
+            padding: '6px',
+            fontSize: '13px',
+            color: '#fff',
+            borderRadius: '10px',
+            border: '2px solid #fff'
+        },
+        button: {
+            backgroundColor: '#fff',
+            marginLeft: '16px',
+            padding: '6px',
+            fontSize: '13px',
+            color: '#000',
+            borderRadius: '10px',
+            border: '2px solid #9966CC'
         }
     }
 
@@ -103,11 +123,19 @@ const Header = (props) => {
     return(
         <nav className='Header' style={styles.header}>
             <Link to='#' id='logo' style={styles.logo}>WiseTime</Link>
-            <div>
+            <div className='navLinks'>
                 {user && (
                     <li className="nav-item" style={styles.list}>
                         <Link to='/schedule' style={location.pathname === '/schedule' ? styles.linkActive : styles.link}>Schedule</Link>
                         <Link to='/statistics' style={location.pathname === '/statistics' ? styles.linkActive : styles.link}>Statistics</Link>
+                    </li>
+                )}
+            </div>
+            <div className='navButtons'>
+                {user && (
+                    <li className="nav-item" style={styles.list}>
+                        <Link to='/add' style={location.pathname === '/add' ? styles.buttonActive : styles.button}>Add Task</Link>
+                        <Link to='/constraints' style={location.pathname === '/constraints' ? styles.buttonActive : styles.button}>Manage Constraints</Link>
                     </li>
                 )}
             </div>
