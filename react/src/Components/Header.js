@@ -135,7 +135,7 @@ const Header = (props) => {
                 {user && (
                     <li className="nav-item" style={styles.list}>
                         <Link to='/add' style={location.pathname === '/add' ? styles.buttonActive : styles.button}>Add Task</Link>
-                        <Link to='/constraints' style={location.pathname === '/constraints' ? styles.buttonActive : styles.button}>Manage Constraints</Link>
+                        <Link to='/preferences' style={location.pathname === '/preferences' ? styles.buttonActive : styles.button}>Manage Preferences</Link>
                     </li>
                 )}
             </div>

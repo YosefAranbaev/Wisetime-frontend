@@ -37,7 +37,7 @@ const Profile = (props) => {
       <Heading heading='Profile' />
       <p><b>Username:</b> {user.username}</p>
       <p><b>Email:</b> {user.email}</p><br/>
-      <Link to='/constraints' style={styles.button}>Manage personal constraints</Link>
+      <Link to='/preferences' style={styles.button}>Manage personal preferences</Link>
     </div>
   );
 };

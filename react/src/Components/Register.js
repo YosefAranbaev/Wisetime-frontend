@@ -96,10 +96,10 @@ const Register = (props) => {
     if (checkBtn.current.context._errors.length === 0) {
       AuthService.register(username, email, password).then(
         () => {
-          history.push("/constraints");
+          history.push("/preferences");
           swal.fire({
             title: 'Welcome to WiseTime!',
-            text: 'Manage your constraints and categories for better experience',
+            text: 'Manage your preferences for better experience',
             width: 600,
             padding: '3em',
             color: '#000',
