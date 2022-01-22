@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
@@ -11,9 +11,6 @@ import Profile from "./components/Profile";
 import Schedule from "./components/Schedule";
 import Header from './components/Header';
 
-// import AuthVerify from "./common/AuthVerify";
-import EventBus from "./common/EventBus";
-
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
 
@@ -23,14 +20,6 @@ const App = () => {
     if (user) {
       setCurrentUser(user);
     }
-
-    EventBus.on("logout", () => {
-      logOut();
-    });
-
-    return () => {
-      EventBus.remove("logout");
-    };
   }, []);
 
   const logOut = () => {
@@ -47,11 +36,9 @@ const App = () => {
           <Route exact path='/' component={() => <Login currentUser={currentUser} />} />
           <Route exact path='/register' component={() => <Register currentUser={currentUser} />} />
           <Route exact path='/profile' component={() => <Profile currentUser={currentUser} />} />
-          <Route path='/schedule' component={() => <Schedule currentUser={currentUser} />} />
+          <Route path='/schedule' component={() => <Schedule currentUser={currentUser} logOut={logOut} />} />
         </Switch>
       </div>
-
-      {/* <AuthVerify logOut={logOut}/> */}
     </div>
   );
 };

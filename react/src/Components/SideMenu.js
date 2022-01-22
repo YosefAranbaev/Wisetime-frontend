@@ -24,12 +24,6 @@ const SideMenu = (props) => {
         }
     }
 
-    const history = useHistory();
-
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-    };
-
     return ( 
         <div className='sideMenu' style={styles.menu}>
             <Link to='/profile' style={styles.link}>Profile</Link>

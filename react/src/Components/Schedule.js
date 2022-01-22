@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
 import Heading from './Heading';
 
 const Schedule = (props) => {
@@ -25,17 +24,17 @@ const Schedule = (props) => {
           setTasks(response.data);
         },
         (error) => {
-          const _content =
+          const content =
             (error.response &&
               error.response.data &&
               error.response.data.message) ||
             error.message ||
             error.toString();
   
-            setTasks(_content);
+            setTasks(content);
   
           if (error.response && error.response.status === 401) {
-            EventBus.dispatch("logout");
+            props.logOut();
           }
         }
       );
