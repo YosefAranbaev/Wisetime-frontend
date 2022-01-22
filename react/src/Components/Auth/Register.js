@@ -6,7 +6,7 @@ import { isEmail } from "validator";
 import { useHistory } from "react-router-dom";
 import swal from 'sweetalert2';
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
 window.Swal = swal;
 

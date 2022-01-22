@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 
-import Header from './Components/Header';
+import Header from './Components/Partials/Header';
 import Router from './Router/Router';
 
 const App = () => {

@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 
-import Login from "../Components/Login";
-import Register from "../Components/Register";
+import Login from "../Components/Auth/Login";
+import Register from "../Components/Auth/Register";
 import Profile from "../Components/Profile";
 import Schedule from "../Components/Schedule";
-import Preferences from "../Components/Preferences";
+import Preferences from "../Components/Preferences/Preferences";
 import AddTask from "../Components/AddTask";
 import Statistics from "../Components/Statistics";
 import Inbox from "../Components/Inbox";

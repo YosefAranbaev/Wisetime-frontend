@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import SideMenu from './SideMenu';
-import AuthService from '../services/auth.service';
+import AuthService from '../../services/auth.service';
 
 const Header = (props) => {
 

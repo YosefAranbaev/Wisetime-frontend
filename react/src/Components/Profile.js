@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-import Heading from './Heading';
+import Heading from './Partials/Heading';
 import AuthService from '../services/auth.service';
 
 const Profile = (props) => {
