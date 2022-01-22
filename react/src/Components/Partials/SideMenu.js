@@ -7,7 +7,7 @@ const SideMenu = (props) => {
 
     const styles = {
         menu: {
-            width: 'auto',
+            width: '80px',
             height: 'auto',
             position: 'absolute',
             top: '60px',

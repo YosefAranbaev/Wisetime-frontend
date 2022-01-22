@@ -126,7 +126,7 @@ const Header = (props) => {
             <div className='navLinks'>
                 {user && (
                     <li className="nav-item" style={styles.list}>
-                        <Link to='/schedule' style={location.pathname === '/schedule' ? styles.linkActive : styles.link}>Schedule</Link>
+                        <Link to='/schedule' style={location.pathname === '/schedule' ? styles.linkActive : styles.link}>Week Schedule</Link>
                         <Link to='/statistics' style={location.pathname === '/statistics' ? styles.linkActive : styles.link}>Statistics</Link>
                     </li>
                 )}

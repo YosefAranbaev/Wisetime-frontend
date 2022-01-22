@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
+import swal from 'sweetalert2';
 
 import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
+import Category from './Category.js';
+
+window.Swal = swal;
 
 const Categories = (props) => {
   const styles = {
-    workingTimePerDay: {
-      display: 'flex'
-    },
-    timeRanges: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-around',
-      margin: '-8px 0 0 10px'
-    },
     button: {
       marginTop: '20px',
       border: '1px solid green',
@@ -21,45 +16,41 @@ const Categories = (props) => {
       color: '#fff',
       padding: '10px 20px',
       borderRadius: '10px'
-    },
-    categoriesTime: {
-      display: 'flex'
-    },
-    timeOfDay: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'spaceAround'
     }
   }
 
   const user = AuthService.getCurrentUser();
 
+  const handleCategories = (e) => {
+    e.preventDefault();
+
+    swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Saved successfully',
+      showConfirmButton: false,
+      timer: 1500,
+      width: '450px',
+      height: '50px',
+      fontSize: '13px'
+    })
+  }
+
   return (
-    <form action="" method="POST" name="constraintsForm" onSubmit='return addConstraints()'>
+    <form>
         <label>Select preferred time of the day for the next categories:</label><br/>
 
-        <section class="categoriesTime" style={styles.categoriesTime}>
-          {/* <Category category='Study' /> */}
+        <section className="categoriesTime" style={styles.categoriesTime}>
+          <Category name='Study' />
+          <Category name='Work' />
+          <Category name='Hobby' />
+          <Category name='Chores' />
+          <Category name='Other' />
         </section>
 
-        <button style={styles.button} name="submit" type="submit">Save Categories</button>
+        <button style={styles.button} name="submit" onClick={handleCategories}>Save Categories</button>
     </form>
   );
 };
 
 export default Categories;
-
-
-{/* <section class="categories">
-<p class="weekDay">Study</p>
-<p class="weekDay">Work</p>
-<p class="weekDay">Hobby</p>
-<p class="weekDay">Chores</p>
-</section>
-<section class="timeOfDay" style={styles.timeOfDay}>
-<select name="study">
-<option value="1">Any</option>
-<option value="2">Morning</option>
-<option value="3">Day</option>
-<option value="4">Evening</option>
-</select> */}
