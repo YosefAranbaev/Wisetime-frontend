@@ -6,6 +6,9 @@ import { useHistory } from "react-router-dom";
 
 import AuthService from "../../services/auth.service";
 
+// import swal from 'sweetalert2';
+// window.Swal = swal;
+
 const required = (value) => {
   if (!value) {
     return (
@@ -58,6 +61,19 @@ const Login = (props) => {
         () => {
           history.push("/schedule");
           window.location.reload();
+          // swal.fire({
+          //   title: 'Welcome to WiseTime!',
+          //   text: 'Manage your preferences for better experience',
+          //   width: 600,
+          //   padding: '3em',
+          //   color: '#000',
+          //   backdrop: `
+          //               rgba(0,0,123,0.4)
+          //               url("https://i.gifer.com/origin/a4/a41b711baaf00ec407578bd7fbb6087c.gif")
+          //               left top
+          //               no-repeat
+          //             `
+          // })
         },
         (error) => {
           setLoading(false);

@@ -21,7 +21,7 @@ const Categories = (props) => {
 
   const user = AuthService.getCurrentUser();
 
-  const handleCategories = (e) => {
+  const saveCategories = (e) => {
     e.preventDefault();
 
     swal.fire({
@@ -48,7 +48,7 @@ const Categories = (props) => {
           <Category name='Other' />
         </section>
 
-        <button style={styles.button} name="submit" onClick={handleCategories}>Save Categories</button>
+        <button style={styles.button} name="submit" onClick={saveCategories}>Save Categories</button>
     </form>
   );
 };
