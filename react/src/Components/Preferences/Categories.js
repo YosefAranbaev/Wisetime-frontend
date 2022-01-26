@@ -20,9 +20,19 @@ const Categories = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const [categories, setCategories] = useState(null);
+
+  useEffect(() => {
+    UserService.getCategories(user.id)
+      .then(response => {
+        setCategories(response.data);
+      })
+  },[]);
 
   const saveCategories = (e) => {
     e.preventDefault();
+
+    UserService.updateCategories(user.id, categories);
 
     swal.fire({
       position: 'center',
@@ -36,17 +46,25 @@ const Categories = (props) => {
     })
   }
 
+  const onUpdate = (category, value) => {
+    const newCategory = Object.assign({}, categories);
+    newCategory[category] = value;
+    setCategories(newCategory);
+  };
+
   return (
     <form>
         <label>Select preferred time of the day for the next categories:</label><br/>
 
-        <section className="categoriesTime" style={styles.categoriesTime}>
-          <Category name='Study' />
-          <Category name='Work' />
-          <Category name='Hobby' />
-          <Category name='Chores' />
-          <Category name='Other' />
-        </section>
+        {categories && 
+          <section className="categoriesTime" style={styles.categoriesTime}>
+            <Category name='Study'  value={categories.study}  onUpdate={value => onUpdate('study', value)} />
+            <Category name='Work'   value={categories.work}   onUpdate={value => onUpdate('work', value)} />
+            <Category name='Hobby'  value={categories.hobby}  onUpdate={value => onUpdate('hobby', value)} />
+            <Category name='Chores' value={categories.chores} onUpdate={value => onUpdate('chores', value)} />
+            <Category name='Other'  value={categories.other}  onUpdate={value => onUpdate('other', value)} />
+          </section>
+        }
 
         <button style={styles.button} name="submit" onClick={saveCategories}>Save Categories</button>
     </form>
