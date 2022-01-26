@@ -23,10 +23,12 @@ const Categories = (props) => {
   const [categories, setCategories] = useState(null);
 
   useEffect(() => {
-    UserService.getCategories(user.id)
+    if(user) {
+      UserService.getCategories(user.id)
       .then(response => {
         setCategories(response.data);
       })
+    }
   },[]);
 
   const saveCategories = (e) => {

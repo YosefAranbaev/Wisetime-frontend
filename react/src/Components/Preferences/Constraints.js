@@ -32,10 +32,12 @@ const Constraints = (props) => {
   const [constraints, setConstraints] = useState(null);
 
   useEffect(() => {
-    UserService.getConstraints(user.id)
+    if(user) {
+      UserService.getConstraints(user.id)
       .then(response => {
         setConstraints(response.data);
       })
+    }
   },[]);
 
   const saveConstraints = (e) => {

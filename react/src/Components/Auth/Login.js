@@ -1,13 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { useHistory } from "react-router-dom";
 
 import AuthService from "../../services/auth.service";
-
-// import swal from 'sweetalert2';
-// window.Swal = swal;
 
 const required = (value) => {
   if (!value) {
@@ -29,6 +26,15 @@ const Login = (props) => {
     }
   }
 
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .then(response => {
+      if(response.status === 200) {
+        history.push("/schedule");
+      }
+    })
+  }, [])
+  
   const form = useRef();
   const checkBtn = useRef();
   const history = useHistory();
@@ -61,19 +67,6 @@ const Login = (props) => {
         () => {
           history.push("/schedule");
           window.location.reload();
-          // swal.fire({
-          //   title: 'Welcome to WiseTime!',
-          //   text: 'Manage your preferences for better experience',
-          //   width: 600,
-          //   padding: '3em',
-          //   color: '#000',
-          //   backdrop: `
-          //               rgba(0,0,123,0.4)
-          //               url("https://i.gifer.com/origin/a4/a41b711baaf00ec407578bd7fbb6087c.gif")
-          //               left top
-          //               no-repeat
-          //             `
-          // })
         },
         (error) => {
           setLoading(false);

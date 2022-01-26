@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import UserService from "../services/user.service";
 import AuthService from '../services/auth.service';
@@ -16,8 +17,16 @@ const AddTask = (props) => {
         overflow: 'hidden',
     }
   }
+  
+  const history = useHistory();
 
   const user = AuthService.getCurrentUser();
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .catch(() => {
+      history.push("/");
+    })
+  }, [])
 
   return (
     <div className="container" style={styles.container}>
