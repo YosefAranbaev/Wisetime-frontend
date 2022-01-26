@@ -29,9 +29,21 @@ const Constraints = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const [constraints, setConstraints] = useState(null);
 
-  const handleConstraints = (e) => {
+  useEffect(() => {
+    if(user) {
+      UserService.getConstraints(user.id)
+      .then(response => {
+        setConstraints(response.data);
+      })
+    }
+  },[]);
+
+  const saveConstraints = (e) => {
     e.preventDefault();
+
+    UserService.updateConstraints(user.id, constraints);
 
     swal.fire({
       position: 'center',
@@ -45,17 +57,62 @@ const Constraints = (props) => {
     })
   }
 
+  const onUpdate = (weekday, newTime) => {
+    const newConstraint = Object.assign({}, constraints);
+    newConstraint[weekday] = newTime;
+    setConstraints(newConstraint);
+  };
+  
   return (
     <form>
         <label>Please select your working time per day:</label><br/>
-        <Constraint weekday='Sunday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Monday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Tuesday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Wednesday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Thursday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Saturday' startTime='07:00' endTime='23:00' />
-        <Constraint weekday='Sunday' startTime='07:00' endTime='23:00' />
-      <button style={styles.button} name="submit" onClick={handleConstraints}>Save Constraints</button>
+        {constraints && 
+          <>
+            <Constraint 
+              weekday='Sunday' 
+              startTime={constraints.sunday.split('-')[0]} 
+              endTime={constraints.sunday.split('-')[1]}
+              onUpdate={newTime => onUpdate('sunday', newTime)}
+            />
+            <Constraint 
+              weekday='Monday' 
+              startTime={constraints.monday.split('-')[0]} 
+              endTime={constraints.monday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('monday', newTime)}
+            />
+            <Constraint 
+              weekday='Tuesday' 
+              startTime={constraints.tuesday.split('-')[0]} 
+              endTime={constraints.tuesday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('tuesday', newTime)}
+            />
+            <Constraint 
+              weekday='Wednesday' 
+              startTime={constraints.wednesday.split('-')[0]} 
+              endTime={constraints.wednesday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('wednesday', newTime)}
+            />
+            <Constraint 
+              weekday='Thursday' 
+              startTime={constraints.thursday.split('-')[0]} 
+              endTime={constraints.thursday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('thursday', newTime)}
+            />
+            <Constraint 
+              weekday='Friday' 
+              startTime={constraints.friday.split('-')[0]} 
+              endTime={constraints.friday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('friday', newTime)}
+            />
+            <Constraint 
+              weekday='Saturday' 
+              startTime={constraints.saturday.split('-')[0]} 
+              endTime={constraints.saturday.split('-')[1]} 
+              onUpdate={newTime => onUpdate('saturday', newTime)}
+            />
+          </>
+        }
+      <button style={styles.button} name="submit" onClick={saveConstraints}>Save Constraints</button>
     </form>
   );
 };

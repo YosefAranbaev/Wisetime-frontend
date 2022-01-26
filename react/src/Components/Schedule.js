@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import UserService from "../services/user.service";
 import Heading from './Partials/Heading';
@@ -18,7 +19,15 @@ const Schedule = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const history = useHistory();
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .catch(() => {
+      history.push("/");
+    })
+  }, [])
 
   useEffect(() => {
     if(user) {

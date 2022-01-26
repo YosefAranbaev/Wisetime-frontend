@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import Heading from './Partials/Heading';
 import AuthService from '../services/auth.service';
@@ -31,12 +32,19 @@ const Profile = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const history = useHistory();
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .catch(() => {
+      history.push("/");
+    })
+  }, [])
 
   return (
-    <div className="profileContainer" style={styles.profileContainer}>
+    user && <div className="profileContainer" style={styles.profileContainer}>
       <Heading heading='Profile' />
-      <p><b>Username:</b> {user.username}</p>
-      <p><b>Email:</b> {user.email}</p><br/>
+      <p><b>Username:</b> {user ? user.username : ''}</p>
+      <p><b>Email:</b> {user ? user.email : ''}</p><br/>
       <Link to='/preferences' style={styles.button}>Manage personal preferences</Link>
     </div>
   );

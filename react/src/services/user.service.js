@@ -7,6 +7,26 @@ const getTasks = (userId) => {
   return axios.get(`${API_URL}/${userId}/tasks`, { headers: authHeader() });
 };
 
+const getConstraints = (userId) => {
+  return axios.get(`${API_URL}/${userId}/constraints`, { headers: authHeader() });
+}
+
+const updateConstraints = (userId, newConstraints) => {
+  return axios.post(`${API_URL}/${userId}/constraints`, newConstraints, { headers: authHeader() });
+}
+
+const getCategories = (userId) => {
+  return axios.get(`${API_URL}/${userId}/categories`, { headers: authHeader() });
+}
+
+const updateCategories = (userId, newCategories) => {
+  return axios.post(`${API_URL}/${userId}/categories`, newCategories, { headers: authHeader() });
+}
+
 export default {
-  getTasks
+  getTasks,
+  getConstraints,
+  updateConstraints,
+  getCategories,
+  updateCategories
 };

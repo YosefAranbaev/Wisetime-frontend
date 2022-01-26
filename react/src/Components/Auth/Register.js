@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -59,6 +59,15 @@ const Register = (props) => {
       border: 'none'
     }
   }
+
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .then(response => {
+      if(response.status === 200) {
+        history.push("/schedule");
+      }
+    })
+  }, [])
 
   const form = useRef();
   const checkBtn = useRef();
