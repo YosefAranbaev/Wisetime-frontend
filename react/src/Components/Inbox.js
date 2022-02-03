@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import UserService from "../services/user.service";
 import AuthService from '../services/auth.service';
@@ -18,6 +19,13 @@ const Inbox = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const history = useHistory();
+  useEffect(() => {
+    AuthService.isAuthorized()
+    .catch(() => {
+      history.push("/");
+    })
+  }, [])
 
   return (
     <div className="container" style={styles.container}>

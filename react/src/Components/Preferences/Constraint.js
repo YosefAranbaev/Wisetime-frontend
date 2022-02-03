@@ -22,14 +22,48 @@ const Constraint = (props) => {
   }
 
   const user = AuthService.getCurrentUser();
+  const [start, setStart] = useState(props.startTime);
+  const [end, setEnd] = useState(props.endTime);
+
+  const onChangeStart = (e) => {
+    const start = e.target.value;
+    setStart(start);
+  }
+
+  const onChangeEnd = (e) => {
+    const end = e.target.value;
+    setEnd(end);
+  }
+
+  useEffect(() => {
+    props.onUpdate(`${start}-${end}`);
+  }, [start, end]);
 
   return (
     <section style={styles.category}>
         <section className="timeRange" style={styles.timerange}>
             <label style={styles.label}>{props.weekday}</label>
-            <input type="time" id="appt" name={`${props.weekday}_start_time`} value={props.startTime} min="07:00" max="00:00" style={styles.input} />
+            <input 
+              type="time" 
+              id="appt" 
+              name={`${props.weekday}_start_time`} 
+              value={start} 
+              onChange={onChangeStart} 
+              min="07:00" 
+              max="00:00" 
+              style={styles.input} 
+            />
             <span>-</span>
-            <input type="time" id="appt" name={`${props.weekday}_end_time`} value={props.endTime} min="07:00" max="00:00" style={styles.input} />
+            <input 
+              type="time" 
+              id="appt" 
+              name={`${props.weekday}_end_time`} 
+              value={end} 
+              onChange={onChangeEnd} 
+              min="07:00" 
+              max="00:00" 
+              style={styles.input} 
+            />
         </section>
     </section>
   );
