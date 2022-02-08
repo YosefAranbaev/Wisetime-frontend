@@ -57,10 +57,10 @@ const Schedule = (props) => {
   return (
     <div className="container" style={styles.container}>
       <Heading heading='Week Schedule' />
-      {tasks.map(task =>  <div key={task._id}>
+      {/* {tasks.map(task =>  <div key={task._id}>
                             <p>{JSON.stringify(task)}</p><br/>
                           </div>
-      )}
+      )} */}
       <ScheduleObj/>
     </div>
   );
