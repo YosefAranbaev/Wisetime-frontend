@@ -94,7 +94,6 @@ const AddTask = (props) => {
                     'category': userCategory,
                     'dauration': parseFloat(taskDuration)
                 }
-                
                 const res = $.ajax({
                     type: "POST",
                     url: `http://localhost:8080/api/users/${user.id}/tasks`,
