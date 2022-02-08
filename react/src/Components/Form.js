@@ -9,7 +9,8 @@ import AuthService from '../services/auth.service';
 import Heading from './Partials/Heading';
 import Button from '@mui/material/Button';
 import authHeader from "../services/auth-header";
-const user  = AuthService.getCurrentUser();
+import swal from 'sweetalert';
+const user = AuthService.getCurrentUser();
 const currencies = [
     {
         value: 'chores',
@@ -47,51 +48,65 @@ const colors = [
     },
 ];
 const AddTask = (props) => {
-    let [taskName, setTaskname] = useState("")
-    let [taskDuration, setTaskduration] = useState("")
-    let [taskType, setTasktype] = useState("")
-    let [taskColor, setTaskcolor] = useState("")
+    let [taskName, setTaskname] = useState("");
+    let [taskDuration, setTaskduration] = useState("");
+    let [taskType, setTasktype] = useState("");
+    let [taskColor, setTaskcolor] = useState("");
+    let [userCategory, setUsercategory] = useState(0.25);
     const formErr = {
         color: "red"
     }
     const fileErrorTreatment = (err) => {
         $(".formError").html("");
-        if (err == 400) {
-            $(".formError").append("Please fill in all the fields on the form!");
-        }
         if (err == 409) {
             $(".formError").append("There were hours left that were not entered into the system due to the constraints and categories!");
+            swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
         }
         if (err == 500) {
             $(".formError").append("Error getting the data from db");
-        } 
+            swal("Note!", "Error getting the data from db", "error");
+        }
     }
-    const formValidation = () => {
-        if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
+    const getUsercategory = (taskT) => {
+        fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
+            .then(res => {
+                res.json().then(result => {
+                    setUsercategory(userCategory = result[taskT]);
+                });
+            });
+    }
+    const formValidation = async () => {
+        getUsercategory(taskType);
+        console.log(taskDuration);
+        if (taskDuration < 0 || !parseFloat(taskDuration)||(((taskDuration % 1)*100)%25!==0)) {
+            $(".formError").html("");
+            $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
+        }
+        else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
             $(".formError").html("");
             $('.formError').append("Please fill all the fields in the form!");
         }
         else {
-            const newTask = {
-                'name': taskName,
-                'color': taskColor,
-                'category': taskType,
-                'duration': taskDuration
-            }
-            // console.log(user.categories)
-            const res = $.ajax({
-                type: "POST",
-                url: `http://wisetime.herokuapp.com/api/users/${user.id}/tasks`,
-                data: newTask,
-                headers:authHeader(),
-                success:(res)=>{
-                    window.location.href="http://127.0.0.1:5500/wisetime-frontend/home.html";
-                },
-                error: (response) => {
-                    fileErrorTreatment(response.status);
+            setTimeout(() => {
+                const newTask = {
+                    'name': taskName,
+                    'color': taskColor,
+                    'category': userCategory,
+                    'dauration': parseFloat(taskDuration)
                 }
-            });
-            console.log(newTask);
+                const res = $.ajax({
+                    type: "POST",
+                    url: `http://localhost:8080/api/users/${user.id}/tasks`,
+                    data: newTask,
+                    headers: authHeader(),
+                    success: (res) => {
+                        swal("Good luck!", "The Event was created successfully!", "success");
+                    },
+                    error: (response) => {
+                        fileErrorTreatment(response.status);
+                    }
+                });
+            }, 500);
         }
     }
     return (
@@ -107,8 +122,8 @@ const AddTask = (props) => {
                     />
                 </div>
                 <div>
-                    <TextField required
-                        type="number"
+                    <TextField required inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                        // type="number"
                         id="outlined-required"
                         label="Required duration"
                         defaultValue="0"
