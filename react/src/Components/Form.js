@@ -97,6 +97,7 @@ const AddTask = (props) => {
                 const res = $.ajax({
                     type: "POST",
                     url: `http://localhost:8080/api/users/${user.id}/tasks`,
+                    
                     data: newTask,
                     headers: authHeader(),
                     success: (res) => {
