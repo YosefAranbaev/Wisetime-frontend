@@ -67,27 +67,24 @@ const AddTask = (props) => {
             swal("Note!", "Error getting the data from db", "error");
         }
     }
-    const getUsercategory = (taskT) => {
-        fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
-            .then(res => {
-                res.json().then(result => {
-                    setUsercategory(userCategory = result[taskT]);
-                });
-            });
+    const getUsercategory = async (taskT) => {
+        const res = await fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
+        const result = await res.json()
+        setUsercategory(userCategory = result[taskT]);
     }
     const formValidation = async () => {
-        getUsercategory(taskType);
-        console.log(taskDuration);
-        if (taskDuration < 0 || !parseFloat(taskDuration)||(((taskDuration % 1)*100)%25!==0)) {
+        getUsercategory(taskType).then(() => {
+            console.log(taskDuration);
             $(".formError").html("");
-            $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
-        }
-        else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
-            $(".formError").html("");
-            $('.formError').append("Please fill all the fields in the form!");
-        }
-        else {
-            setTimeout(() => {
+            if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
+                $('.formError').append("The duration should be positive number and consistent every 25 minutes!");
+            }
+            else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
+                $(".formError").html("");
+                $('.formError').append("Please fill all the fields in the form!");
+            }
+            else {
+
                 const newTask = {
                     'name': taskName,
                     'color': taskColor,
@@ -106,8 +103,11 @@ const AddTask = (props) => {
                         fileErrorTreatment(response.status);
                     }
                 });
-            }, 500);
-        }
+
+            }
+
+
+        })
     }
     return (
         <>
