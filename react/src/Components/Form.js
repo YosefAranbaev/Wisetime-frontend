@@ -74,7 +74,6 @@ const AddTask = (props) => {
     }
     const formValidation = async () => {
         getUsercategory(taskType).then(() => {
-            console.log(taskDuration);
             $(".formError").html("");
             if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
                 $('.formError').append("The duration should be positive number and consistent every 25 minutes!");
@@ -118,7 +117,7 @@ const AddTask = (props) => {
                         label="Required task name"
                         defaultValue=""
                         helperText="Please write task name"
-                        onChange={e => { setTaskname(taskName = e.target.value); console.log(taskName) }}
+                        onChange={e => { setTaskname(taskName = e.target.value);}}
                     />
                 </div>
                 <div>
@@ -128,7 +127,7 @@ const AddTask = (props) => {
                         label="Required duration"
                         defaultValue="0"
                         helperText="Please select task duration"
-                        onChange={e => { setTaskduration(taskDuration = e.target.value); console.log(taskDuration) }}
+                        onChange={e => { setTaskduration(taskDuration = e.target.value);}}
                     />
                 </div>
                 <div>
@@ -138,7 +137,7 @@ const AddTask = (props) => {
                         label="Select"
                         defaultValue=""
                         // value={currency}
-                        onChange={e => { setTasktype(taskType = e.target.value); console.log(taskType) }}
+                        onChange={e => { setTasktype(taskType = e.target.value); }}
                         helperText="Please select the task category"
                     >
                         {currencies.map((option) => (
@@ -155,7 +154,7 @@ const AddTask = (props) => {
                         label="Select"
                         defaultValue=""
                         // value={currency}
-                        onChange={e => { setTaskcolor(taskColor = e.target.value); console.log(taskColor) }}
+                        onChange={e => { setTaskcolor(taskColor = e.target.value);}}
                         helperText="Please select a color"
                     >
                         {colors.map((option) => (

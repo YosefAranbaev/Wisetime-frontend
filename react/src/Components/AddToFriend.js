@@ -65,10 +65,9 @@ const AddToFriend = (props) => {
       })
   }, [])
   const getUserByemail = async () => {
-    console.log(userEmail);
     try {
       const res = await fetch(`http://localhost:8080/api/users/${userEmail}`, { method: 'GET', headers: authHeader() })
-      const result = await res.json()
+      const result = await res.json();
       setUserId(userId = result._id);
       setFriend(friend = result);
     }
@@ -78,7 +77,6 @@ const AddToFriend = (props) => {
   }
   const isValidEmail = async () => {
     await getUserByemail();
-    console.log(userId);
     if (!userId || userId == "")
       return false;
     return true;
@@ -114,7 +112,6 @@ const AddToFriend = (props) => {
     }
   }
   const formValidation = async () => {
-    // console.log(userEmail);
     $(".formError").html("");
     if (await checkIsvalidFields() === true) {
       try {
@@ -122,9 +119,9 @@ const AddToFriend = (props) => {
           "name": taskName,
           "id": userId,
           "email": userEmail,
-          "dauration": parseInt(taskDuration),
+          "duration_time": parseFloat(taskDuration),
           "id_of_side_user": user.id,
-          "name_of_side_user": user.name,
+          "name_of_side_user": user.username,
           "color": taskColor,
           "task_type": parseInt(friend.categories[taskType]),
         }
@@ -134,7 +131,6 @@ const AddToFriend = (props) => {
           data: Body,
           headers: authHeader(),
           success: (res) => {
-            console.log(res);
             swal("Well Done!", "The Event was created successfully and sent to your friend!", "success");
           },
           error: (response) => {
@@ -143,7 +139,6 @@ const AddToFriend = (props) => {
         });
       }
       catch (err) {
-        console.log("Error");
       }
     }
 
@@ -173,7 +168,7 @@ const AddToFriend = (props) => {
             label="Required task name"
             defaultValue=""
             helperText="Please write task name"
-            onChange={e => { setTaskname(taskName = e.target.value); console.log(taskName) }}
+            onChange={e => { setTaskname(taskName = e.target.value); }}
           />
         </div>
         <div>
@@ -183,7 +178,7 @@ const AddToFriend = (props) => {
             defaultValue=""
             helperText="Please write the email of the user"
             autoComplete="Disabled"
-            onChange={e => { setUseremail(userEmail = e.target.value); console.log(userEmail) }}
+            onChange={e => { setUseremail(userEmail = e.target.value);}}
           />
         </div>
         <div>
@@ -193,7 +188,7 @@ const AddToFriend = (props) => {
             label="Required duration"
             defaultValue="0"
             helperText="Please select task duration"
-            onChange={e => { setTaskduration(taskDuration = e.target.value); console.log(taskDuration) }}
+            onChange={e => { setTaskduration(taskDuration = e.target.value);}}
           />
         </div>
         <div>
@@ -203,7 +198,7 @@ const AddToFriend = (props) => {
             label="Select"
             defaultValue=""
             // value={currency}
-            onChange={e => { setTasktype(taskType = e.target.value); console.log(taskType) }}
+            onChange={e => { setTasktype(taskType = e.target.value); }}
             helperText="Please select the task category"
           >
             {currencies.map((option) => (
@@ -220,7 +215,7 @@ const AddToFriend = (props) => {
             label="Select"
             defaultValue=""
             // value={currency}
-            onChange={e => { setTaskcolor(taskColor = e.target.value); console.log(taskColor) }}
+            onChange={e => { setTaskcolor(taskColor = e.target.value);}}
             helperText="Please select a color"
           >
             {colors.map((option) => (
