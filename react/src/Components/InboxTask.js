@@ -62,7 +62,15 @@ const InboxTask = (props) => {
                 }
             });
     }
-    const createThetask=()=>{
+    const fileErrorTreatment = (err) => {
+        if (err == 409) {
+            swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
+        }
+        if (err == 500) {
+            swal("Note!", "Error getting the data from db", "error");
+        }
+    }
+    const createThetask = () => {
         const newTask = {
             'name': props.name,
             'color': props.color,
@@ -80,7 +88,7 @@ const InboxTask = (props) => {
                 swal("Good luck!", "The Event was created successfully!", "success");
             },
             error: (response) => {
-                swal("Error", "The Event was not created try again!", "error");
+                fileErrorTreatment(response.status);
             }
         });
     }
