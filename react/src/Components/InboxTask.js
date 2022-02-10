@@ -62,7 +62,7 @@ const InboxTask = (props) => {
                 }
             });
     }
-    const fileErrorTreatment = (err) => {
+    const errorTreatment = (err) => {
         if (err == 409) {
             swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
         }
@@ -88,7 +88,7 @@ const InboxTask = (props) => {
                 swal("Good luck!", "The Event was created successfully!", "success");
             },
             error: (response) => {
-                fileErrorTreatment(response.status);
+                errorTreatment(response.status);
             }
         });
     }
