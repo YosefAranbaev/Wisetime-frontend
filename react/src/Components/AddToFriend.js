@@ -94,7 +94,7 @@ const AddToFriend = (props) => {
     }
     else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
       $(".formError").html("");
-      $('.formError').append("The duration should be positive number and consistent every 25 minutes!");
+      $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
       return false;
     }
     else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0 || userEmail == "") {
