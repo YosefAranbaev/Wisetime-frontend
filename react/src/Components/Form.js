@@ -67,27 +67,23 @@ const AddTask = (props) => {
             swal("Note!", "Error getting the data from db", "error");
         }
     }
-    const getUsercategory = (taskT) => {
-        fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
-            .then(res => {
-                res.json().then(result => {
-                    setUsercategory(userCategory = result[taskT]);
-                });
-            });
+    const getUsercategory = async (taskT) => {
+        const res = await fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
+        const result = await res.json()
+        setUsercategory(userCategory = result[taskT]);
     }
     const formValidation = async () => {
-        getUsercategory(taskType);
-        console.log(taskDuration);
-        if (taskDuration < 0 || !parseFloat(taskDuration)||(((taskDuration % 1)*100)%25!==0)) {
+        getUsercategory(taskType).then(() => {
             $(".formError").html("");
-            $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
-        }
-        else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
-            $(".formError").html("");
-            $('.formError').append("Please fill all the fields in the form!");
-        }
-        else {
-            setTimeout(() => {
+            if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
+                $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
+            }
+            else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
+                $(".formError").html("");
+                $('.formError').append("Please fill all the fields in the form!");
+            }
+            else {
+
                 const newTask = {
                     'name': taskName,
                     'color': taskColor,
@@ -106,8 +102,11 @@ const AddTask = (props) => {
                         fileErrorTreatment(response.status);
                     }
                 });
-            }, 500);
-        }
+
+            }
+
+
+        })
     }
     return (
         <>
@@ -118,7 +117,7 @@ const AddTask = (props) => {
                         label="Required task name"
                         defaultValue=""
                         helperText="Please write task name"
-                        onChange={e => { setTaskname(taskName = e.target.value); console.log(taskName) }}
+                        onChange={e => { setTaskname(taskName = e.target.value);}}
                     />
                 </div>
                 <div>
@@ -128,7 +127,7 @@ const AddTask = (props) => {
                         label="Required duration"
                         defaultValue="0"
                         helperText="Please select task duration"
-                        onChange={e => { setTaskduration(taskDuration = e.target.value); console.log(taskDuration) }}
+                        onChange={e => { setTaskduration(taskDuration = e.target.value);}}
                     />
                 </div>
                 <div>
@@ -138,7 +137,7 @@ const AddTask = (props) => {
                         label="Select"
                         defaultValue=""
                         // value={currency}
-                        onChange={e => { setTasktype(taskType = e.target.value); console.log(taskType) }}
+                        onChange={e => { setTasktype(taskType = e.target.value); }}
                         helperText="Please select the task category"
                     >
                         {currencies.map((option) => (
@@ -155,7 +154,7 @@ const AddTask = (props) => {
                         label="Select"
                         defaultValue=""
                         // value={currency}
-                        onChange={e => { setTaskcolor(taskColor = e.target.value); console.log(taskColor) }}
+                        onChange={e => { setTaskcolor(taskColor = e.target.value);}}
                         helperText="Please select a color"
                     >
                         {colors.map((option) => (

@@ -9,7 +9,7 @@ import Preferences from "../Components/Preferences/Preferences";
 import AddTask from "../Components/AddTask";
 import Statistics from "../Components/Statistics";
 import Inbox from "../Components/Inbox";
-
+import AddToFriend from "../Components/AddToFriend";
 const Router = (props) => {
 
   return (
@@ -20,6 +20,7 @@ const Router = (props) => {
         <Route path='/schedule' component={() => <Schedule />} />
         <Route path='/preferences' component={() => <Preferences />} />
         <Route path='/add' component={() => <AddTask />} />
+        <Route path='/addTofriend' component={() => <AddToFriend />} />
         <Route path='/statistics' component={() => <Statistics />} />
         <Route path='/inbox' component={() => <Inbox />} />
     </Switch>
