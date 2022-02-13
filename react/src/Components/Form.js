@@ -79,6 +79,7 @@ const AddTask = (props) => {
         getUsercategory(taskType).then(() => {
             $(".formError").html("");
             if(taskName.length>35){
+                
                 $('.formError').append("The name of the task should be less than 36 characters!");
             }
             else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
