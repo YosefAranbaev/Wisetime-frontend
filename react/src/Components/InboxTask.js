@@ -9,6 +9,13 @@ import swal from 'sweetalert';
 import Button from '@mui/material/Button';
 
 const user = AuthService.getCurrentUser();
+const durationTime ={
+    position:'absolute',
+    with:'100px',
+    height:'20px',
+    marginLeft:'15px',
+    marginTop:'15px',
+}
 const task = {
     marginLeft: '70px',
     marginTop: '15px',
@@ -20,17 +27,17 @@ const task = {
 const friendName = {
     with:'100px',
     height:'20px',
-    textAlign: 'center',
     marginTop: '30px',
+    marginLeft:'15px'
 }
 const name = {
     with:'100px',
     height:'20px',
-    textAlign: 'center',
+    marginLeft:'15px'
 }
 const successBtn = {
     marginLeft: '14px',
-    marginTop: '35px'
+    marginTop: '45px'
 }
 
 
@@ -114,7 +121,8 @@ const InboxTask = (props) => {
         <>
             <div style={task}>
                 <p style={friendName}><b>{props.friendName} sent you a task</b></p>
-                <p style={name}>The task: {props.name}</p>
+                <p style={name}><b>The task: </b>{props.name}</p>
+                <p style={durationTime}><b>Estimated time:</b> {props.duration} hours</p>
                 <Button variant="contained" color="success" style={successBtn} onClick={createTask}>
                     create
                 </Button>
