@@ -33,7 +33,8 @@ const friendName = {
 const name = {
     with:'100px',
     height:'20px',
-    marginLeft:'15px'
+    marginLeft:'15px',
+    marginTop:'25px'
 }
 const successBtn = {
     marginLeft: '14px',
