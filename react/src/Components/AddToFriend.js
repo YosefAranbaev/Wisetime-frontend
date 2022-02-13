@@ -49,8 +49,8 @@ const colors = [
 ];
 const AddToFriend = (props) => {
   const confirmBtm = {
-    marginTop:'20px'
-}
+    marginTop: '20px'
+  }
 
   let [taskName, setTaskname] = useState("");
   let [userEmail, setUseremail] = useState("");
@@ -86,7 +86,10 @@ const AddToFriend = (props) => {
     return true;
   }
   const checkIsvalidFields = async () => {
-    if (await isValidEmail() === false) {
+    if (taskName.length > 35) {
+      $('.formError').append("The name of the task should be less than 36 characters!");
+    }
+    else if (await isValidEmail() === false) {
       $(".formError").html("");
       $('.formError').append("Wrong Email!");
       return false;
@@ -179,7 +182,7 @@ const AddToFriend = (props) => {
             label="Required user's email"
             defaultValue=""
             autoComplete="Disabled"
-            onChange={e => { setUseremail(userEmail = e.target.value);}}
+            onChange={e => { setUseremail(userEmail = e.target.value); }}
           />
         </div>
         <div>
@@ -187,7 +190,7 @@ const AddToFriend = (props) => {
             id="outlined-required"
             label="Required duration (0.25 = 1/4 hour )"
             defaultValue="0"
-            onChange={e => { setTaskduration(taskDuration = e.target.value);}}
+            onChange={e => { setTaskduration(taskDuration = e.target.value); }}
           />
         </div>
         <div>
@@ -211,7 +214,7 @@ const AddToFriend = (props) => {
             select
             label="Select a color"
             defaultValue=""
-            onChange={e => { setTaskcolor(taskColor = e.target.value);}}
+            onChange={e => { setTaskcolor(taskColor = e.target.value); }}
           >
             {colors.map((option) => (
               <MenuItem key={option.value} value={option.value}>

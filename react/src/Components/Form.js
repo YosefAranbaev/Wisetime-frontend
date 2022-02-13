@@ -78,7 +78,10 @@ const AddTask = (props) => {
     const formValidation = async () => {
         getUsercategory(taskType).then(() => {
             $(".formError").html("");
-            if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
+            if(taskName.length>35){
+                $('.formError').append("The name of the task should be less than 36 characters!");
+            }
+            else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
                 $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
             }
             else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
