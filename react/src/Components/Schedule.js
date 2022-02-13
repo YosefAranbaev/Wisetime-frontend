@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import UserService from "../services/user.service";
 import Heading from './Partials/Heading';
 import AuthService from '../services/auth.service';
+import ScheduleObj from '../Components/ScheduleObj';
 
 const Schedule = (props) => {
   const styles = {
@@ -56,10 +57,11 @@ const Schedule = (props) => {
   return (
     <div className="container" style={styles.container}>
       <Heading heading='Week Schedule' />
-      {tasks.map(task =>  <div key={task._id}>
+      {/* {tasks.map(task =>  <div key={task._id}>
                             <p>{JSON.stringify(task)}</p><br/>
                           </div>
-      )}
+      )} */}
+      <ScheduleObj/>
     </div>
   );
 };
