@@ -48,6 +48,10 @@ const colors = [
   },
 ];
 const AddToFriend = (props) => {
+  const confirmBtm = {
+    marginTop: '20px'
+  }
+
   let [taskName, setTaskname] = useState("");
   let [userEmail, setUseremail] = useState("");
   let [taskDuration, setTaskduration] = useState("");
@@ -82,7 +86,10 @@ const AddToFriend = (props) => {
     return true;
   }
   const checkIsvalidFields = async () => {
-    if (await isValidEmail() === false) {
+    if (taskName.length > 35) {
+      $('.formError').append("The name of the task should be less than 36 characters!");
+    }
+    else if (await isValidEmail() === false) {
       $(".formError").html("");
       $('.formError').append("Wrong Email!");
       return false;
@@ -166,8 +173,6 @@ const AddToFriend = (props) => {
             id="outlined-required"
             autoComplete="Disabled"
             label="Required task name"
-            defaultValue=""
-            helperText="Please write task name"
             onChange={e => { setTaskname(taskName = e.target.value); }}
           />
         </div>
@@ -176,30 +181,25 @@ const AddToFriend = (props) => {
             id="outlined-required"
             label="Required user's email"
             defaultValue=""
-            helperText="Please write the email of the user"
             autoComplete="Disabled"
-            onChange={e => { setUseremail(userEmail = e.target.value);}}
+            onChange={e => { setUseremail(userEmail = e.target.value); }}
           />
         </div>
         <div>
           <TextField required inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-            // type="number"
             id="outlined-required"
-            label="Required duration"
+            label="Required duration (0.25 = 1/4 hour )"
             defaultValue="0"
-            helperText="Please select task duration"
-            onChange={e => { setTaskduration(taskDuration = e.target.value);}}
+            onChange={e => { setTaskduration(taskDuration = e.target.value); }}
           />
         </div>
         <div>
           <TextField
             id="outlined-select-currency outlined-required"
             select
-            label="Select"
+            label="Select the task category"
             defaultValue=""
-            // value={currency}
             onChange={e => { setTasktype(taskType = e.target.value); }}
-            helperText="Please select the task category"
           >
             {currencies.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -212,11 +212,9 @@ const AddToFriend = (props) => {
           <TextField
             id="outlined-select-currency outlined-required"
             select
-            label="Select"
+            label="Select a color"
             defaultValue=""
-            // value={currency}
-            onChange={e => { setTaskcolor(taskColor = e.target.value);}}
-            helperText="Please select a color"
+            onChange={e => { setTaskcolor(taskColor = e.target.value); }}
           >
             {colors.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -225,7 +223,7 @@ const AddToFriend = (props) => {
             ))}
           </TextField>
         </div>
-        <Button component="submit" name="submit" variant="contained" onClick={formValidation}>confirm</Button>
+        <Button style={confirmBtm} component="submit" name="submit" variant="contained" onClick={formValidation}>confirm</Button>
         <p className="formError" style={styles.formErr}></p>
       </Box>
 

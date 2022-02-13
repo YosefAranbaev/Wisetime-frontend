@@ -23,7 +23,7 @@ const Inbox = (props) => {
     wrapper: {
       display: 'flex',
       flexWrap: 'wrap',
-      width: '700px',
+      width: '1200px',
       margin: '0 auto',
     }
   }
