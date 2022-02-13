@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import UserService from "../services/user.service";
-import AuthService from '../services/auth.service';
-import Heading from './Partials/Heading';
+import UserService from "../../services/user.service";
+import AuthService from '../../services/auth.service';
+import Heading from '../Partials/Heading';
 
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import $ from 'jquery';
-import authHeader from "../services/auth-header";
+import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
 const currencies = [
   {

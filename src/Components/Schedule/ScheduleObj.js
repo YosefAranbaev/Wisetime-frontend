@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import UserService from "../services/user.service";
-import Heading from './Partials/Heading';
-import AuthService from '../services/auth.service';
+import UserService from "../../services/user.service";
+import Heading from '../Partials/Heading';
+import AuthService from '../../services/auth.service';
 import $ from 'jquery';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Task from './Task';
-import authHeader from "../services/auth-header";
+import authHeader from "../../services/auth-header";
 const user  = AuthService.getCurrentUser();
 const ScheduleObj = (props) => {
     const getTimelist = async () => {

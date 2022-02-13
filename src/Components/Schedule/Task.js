@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import $ from 'jquery';
-import UserService from "../services/user.service";
-import AuthService from '../services/auth.service';
-import Heading from './Partials/Heading';
-import authHeader from "../services/auth-header";
+import UserService from "../../services/user.service";
+import AuthService from '../../services/auth.service';
+import Heading from '../Partials/Heading';
+import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
+import swal2 from 'sweetalert2';
+window.Swal = swal;
 const user  = AuthService.getCurrentUser();
 const hours = {
     "07:00": "s",
@@ -120,9 +122,18 @@ const Task = (props) => {
           })
           .then((willDelete) => {
             if (willDelete) {
-              swal("The task was successfully completed!", {
-                icon: "success",
-              },makeTaskdone());
+              swal2.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Success!',
+                text: 'Your statistics updated',
+                showConfirmButton: false,
+                timer: 2000,
+                width: '450px',
+                height: '50px',
+                fontSize: '13px'
+              })
+              makeTaskdone()
             } else {
               swal("The task is still on schedule");
             }

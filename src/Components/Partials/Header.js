@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoIosNotifications } from "react-icons/io";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { useLocation } from "react-router-dom";
@@ -116,7 +116,7 @@ const Header = (props) => {
     }
 
     const location = useLocation();
-    const user = AuthService.getCurrentUser();
+    let user = AuthService.getCurrentUser();
     const [showDot, setShowDot] = useState(true);
     const [showSideMenu, setShowSideMenu] = useState(false);
 

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import swal from 'sweetalert2';
+import $ from 'jquery';
 
 import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
 import Constraint from './Constraint';
 
 window.Swal = swal;
+
+const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
 const Constraints = (props) => {
   const styles = {
@@ -25,6 +28,9 @@ const Constraints = (props) => {
       color: '#fff',
       padding: '10px 20px',
       borderRadius: '10px'
+    },
+    formError: {
+      color: 'red'
     }
   }
 
@@ -41,9 +47,9 @@ const Constraints = (props) => {
   },[]);
 
   const saveConstraints = (e) => {
-    e.preventDefault();
-
     UserService.updateConstraints(user.id, constraints);
+
+    $('.formError').html("");
 
     swal.fire({
       position: 'center',
@@ -55,6 +61,31 @@ const Constraints = (props) => {
       height: '50px',
       fontSize: '13px'
     })
+  }
+
+  const getStartDate = (constraint) => {
+    return constraint.split('-')[0];
+  }
+
+  const getEndDate = (constraint) => {
+    return constraint.split('-')[1];
+  }
+
+  const isValidTime = (time) => {
+    const minutes = time.split(':')[1];
+    return minutes%15 === 0;
+  }
+
+  const validateConstraints = (e) => {
+    e.preventDefault();
+
+    for(const weekday of weekdays) {
+      if (!isValidTime(getStartDate(constraints[weekday])) || !isValidTime(getEndDate(constraints[weekday]))) {
+        $('.formError').html("The time must be consistent every 15 minutes");
+        return;
+      }
+    }
+    saveConstraints(e);
   }
 
   const onUpdate = (weekday, newTime) => {
@@ -112,7 +143,8 @@ const Constraints = (props) => {
             />
           </>
         }
-      <button style={styles.button} name="submit" onClick={saveConstraints}>Save Constraints</button>
+      <button style={styles.button} name="submit" onClick={validateConstraints}>Save Constraints</button>
+      <p className="formError" style={styles.formError}></p>
     </form>
   );
 };

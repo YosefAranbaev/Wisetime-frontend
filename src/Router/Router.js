@@ -4,12 +4,12 @@ import { Switch, Route } from "react-router-dom";
 import Login from "../Components/Auth/Login";
 import Register from "../Components/Auth/Register";
 import Profile from "../Components/Profile";
-import Schedule from "../Components/Schedule";
+import Schedule from "../Components/Schedule/Schedule";
 import Preferences from "../Components/Preferences/Preferences";
-import AddTask from "../Components/AddTask";
+import AddTask from "../Components/Form/AddTask";
 import Statistics from "../Components/Statistics";
-import Inbox from "../Components/Inbox";
-import AddToFriend from "../Components/AddToFriend";
+import Inbox from "../Components/Inbox/Inbox";
+import AddToFriend from "../Components/Inbox/AddToFriend";
 const Router = (props) => {
 
   return (

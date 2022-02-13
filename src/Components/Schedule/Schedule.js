@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import UserService from "../services/user.service";
-import Heading from './Partials/Heading';
-import AuthService from '../services/auth.service';
-import ScheduleObj from '../Components/ScheduleObj';
+import UserService from "../../services/user.service";
+import Heading from '../Partials/Heading';
+import AuthService from '../../services/auth.service';
+import ScheduleObj from './ScheduleObj';
 
 const Schedule = (props) => {
   const styles = {

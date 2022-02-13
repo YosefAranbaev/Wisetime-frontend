@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
-import UserService from "../services/user.service";
-import AuthService from '../services/auth.service';
-import Heading from './Partials/Heading';
+import UserService from "../../services/user.service";
+import AuthService from '../../services/auth.service';
+import Heading from '../Partials/Heading';
 import $ from 'jquery';
-import authHeader from "../services/auth-header";
-import InboxTask from "../Components/InboxTask";
+import authHeader from "../../services/auth-header";
+import InboxTask from "./InboxTask";
 
 const Inbox = (props) => {
   let [TasksArray, setTasksArray] = useState([])
@@ -18,7 +18,7 @@ const Inbox = (props) => {
       padding: '20px',
       borderRadius: '10px',
       minHeight: '71vh',
-      overflow: 'hidden',
+      overflow: 'hidden'
     },
     wrapper: {
       display: 'flex',

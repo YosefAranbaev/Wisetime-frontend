@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import $ from 'jquery';
-import UserService from "../services/user.service";
-import AuthService from '../services/auth.service';
-import Heading from './Partials/Heading';
-import authHeader from "../services/auth-header";
+import UserService from "../../services/user.service";
+import AuthService from '../../services/auth.service';
+import Heading from '../Partials/Heading';
+import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
 import Button from '@mui/material/Button';
 

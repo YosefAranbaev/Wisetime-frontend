@@ -4,11 +4,11 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import $ from 'jquery';
 import MenuItem from '@mui/material/MenuItem';
-import UserService from "../services/user.service";
-import AuthService from '../services/auth.service';
-import Heading from './Partials/Heading';
+import UserService from "../../services/user.service";
+import AuthService from '../../services/auth.service';
+import Heading from '../Partials/Heading';
 import Button from '@mui/material/Button';
-import authHeader from "../services/auth-header";
+import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
 const user = AuthService.getCurrentUser();
 const confirmBtm = {
@@ -56,17 +56,17 @@ const AddTask = (props) => {
     let [taskType, setTasktype] = useState("");
     let [taskColor, setTaskcolor] = useState("");
     let [userCategory, setUsercategory] = useState(0.25);
+    const history = useHistory();
     const formErr = {
         color: "red"
     }
     const fileErrorTreatment = (err) => {
-        $(".formError").html("");
         if (err == 409) {
-            $(".formError").append("There were hours left that were not entered into the system due to the constraints and categories!");
+            $(".formError").html("There were hours left that were not entered into the system due to the constraints and categories!");
             swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
         }
         if (err == 500) {
-            $(".formError").append("Error getting the data from db");
+            $(".formError").html("Error getting the data from db");
             swal("Note!", "Error getting the data from db", "error");
         }
     }
@@ -77,17 +77,15 @@ const AddTask = (props) => {
     }
     const formValidation = async () => {
         getUsercategory(taskType).then(() => {
-            $(".formError").html("");
             if(taskName.length>35){
                 
-                $('.formError').append("The name of the task should be less than 36 characters!");
+                $('.formError').html("The name of the task should be less than 36 characters!");
             }
             else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
-                $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
+                $('.formError').html("The duration should be positive number and consistent every 15 minutes!");
             }
             else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0) {
-                $(".formError").html("");
-                $('.formError').append("Please fill all the fields in the form!");
+                $('.formError').html("Please fill all the fields in the form!");
             }
             else {
 
@@ -104,6 +102,7 @@ const AddTask = (props) => {
                     headers: authHeader(),
                     success: (res) => {
                         swal("Good luck!", "The Event was created successfully!", "success");
+                        history.push("/schedule");
                     },
                     error: (response) => {
                         fileErrorTreatment(response.status);
