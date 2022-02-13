@@ -11,6 +11,9 @@ import Button from '@mui/material/Button';
 import authHeader from "../services/auth-header";
 import swal from 'sweetalert';
 const user = AuthService.getCurrentUser();
+const confirmBtm = {
+    marginTop:'20px'
+}
 const currencies = [
     {
         value: 'chores',
@@ -116,17 +119,14 @@ const AddTask = (props) => {
                         id="outlined-required"
                         label="Required task name"
                         defaultValue=""
-                        helperText="Please write task name"
                         onChange={e => { setTaskname(taskName = e.target.value);}}
                     />
                 </div>
                 <div>
                     <TextField required inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                        // type="number"
                         id="outlined-required"
-                        label="Required duration"
+                        label="Required duration (0.25 = 1/4 hour )"
                         defaultValue="0"
-                        helperText="Please select task duration"
                         onChange={e => { setTaskduration(taskDuration = e.target.value);}}
                     />
                 </div>
@@ -134,11 +134,9 @@ const AddTask = (props) => {
                     <TextField
                         id="outlined-select-currency outlined-required"
                         select
-                        label="Select"
+                        label="Select the task category"
                         defaultValue=""
-                        // value={currency}
                         onChange={e => { setTasktype(taskType = e.target.value); }}
-                        helperText="Please select the task category"
                     >
                         {currencies.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -151,11 +149,9 @@ const AddTask = (props) => {
                     <TextField
                         id="outlined-select-currency outlined-required"
                         select
-                        label="Select"
+                        label="Please select a color"
                         defaultValue=""
-                        // value={currency}
                         onChange={e => { setTaskcolor(taskColor = e.target.value);}}
-                        helperText="Please select a color"
                     >
                         {colors.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
@@ -164,7 +160,7 @@ const AddTask = (props) => {
                         ))}
                     </TextField>
                 </div>
-                <Button component="submit" name="submit" variant="contained" onClick={formValidation}>confirm</Button>
+                <Button style={confirmBtm} component="submit" name="submit" variant="contained" onClick={formValidation}>confirm</Button>
                 <p className="formError" style={formErr}></p>
             </Box>
         </>
