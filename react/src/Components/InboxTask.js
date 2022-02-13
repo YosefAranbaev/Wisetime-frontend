@@ -10,26 +10,26 @@ import Button from '@mui/material/Button';
 
 const user = AuthService.getCurrentUser();
 const task = {
-    // float: 'none',
     marginLeft: '70px',
     marginTop: '15px',
-    width: '200px',
-    // position: 'absolute',
+    width: '220px',
     backgroundColor: '#F0F8FF',
     height: '200px',
     borderRadius: '25px',
 }
-const driendName = {
-    // marginLeft:'50px',
+const friendName = {
+    with:'100px',
+    height:'20px',
     textAlign: 'center',
     marginTop: '30px',
 }
 const name = {
+    with:'100px',
+    height:'20px',
     textAlign: 'center',
 }
 const successBtn = {
-    // with:'5px',
-    marginLeft: '7px',
+    marginLeft: '14px',
     marginTop: '35px'
 }
 
@@ -95,7 +95,7 @@ const InboxTask = (props) => {
     const createTask = () => {
         swal({
             title: "Are you sure?",
-            text: "Are you sure you want to create thie task?",
+            text: "Are you sure you want to create this task?",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -113,7 +113,7 @@ const InboxTask = (props) => {
     return (
         <>
             <div style={task}>
-                <p style={driendName}><b>{props.friendName} sent you a task</b></p>
+                <p style={friendName}><b>{props.friendName} sent you a task</b></p>
                 <p style={name}>The task: {props.name}</p>
                 <Button variant="contained" color="success" style={successBtn} onClick={createTask}>
                     create
