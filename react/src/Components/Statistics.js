@@ -15,11 +15,19 @@ const Statistics = (props) => {
         borderRadius: '10px',
         minHeight: '71vh',
         overflow: 'hidden',
+    },
+    charts: {
+      display: 'flex',
+      width: '100%',
+      justifyContent: 'space-around'
     }
   }
 
   const user = AuthService.getCurrentUser();
   const history = useHistory();
+  const [chart, setChart] = useState(null);
+  const [gauge, setGauge] = useState(null);
+
   useEffect(() => {
     AuthService.isAuthorized()
     .catch(() => {
@@ -27,9 +35,25 @@ const Statistics = (props) => {
     })
   }, [])
 
+  useEffect(() => {
+    UserService.getGauge()
+      .then(response => {
+        setGauge(response.data.chart);
+      })
+
+    UserService.getChart()
+      .then(response => {
+        setChart(response.data.chart);
+      })
+  }, []);
+  
   return (
     <div className="container" style={styles.container}>
         <Heading heading='Statistics' />
+        <div className='charts' style={styles.charts}>
+          <div dangerouslySetInnerHTML={{__html: gauge}} />
+          <div dangerouslySetInnerHTML={{__html: chart}} />
+        </div>
     </div>
   );
 };

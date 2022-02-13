@@ -23,10 +23,20 @@ const updateCategories = (userId, newCategories) => {
   return axios.post(`${API_URL}/${userId}/categories`, newCategories, { headers: authHeader() });
 }
 
+const getChart = (userId) => {
+  return axios.get(`${API_URL}/${userId}/statistics/chart`, { headers: authHeader() });
+}
+
+const getGauge = (userId) => {
+  return axios.get(`${API_URL}/${userId}/statistics/gauge`, { headers: authHeader() });
+}
+
 export default {
   getTasks,
   getConstraints,
   updateConstraints,
   getCategories,
-  updateCategories
+  updateCategories,
+  getChart,
+  getGauge
 };
