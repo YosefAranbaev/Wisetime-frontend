@@ -6,73 +6,64 @@ import swal from 'sweetalert';
 import swal2 from 'sweetalert2';
 window.Swal = swal;
 
-const hours = {
-    "07:00": "s",
-    "07:15": "sf",
-    "07:30": "st",
-    "07:45": "sff",
-    "08:00": "e",
-    "08:15": "ef",
-    "08:30": "et",
-    "08:45": "eff",
-    "09:00": "n",
-    "09:15": "nf",
-    "09:30": "nt",
-    "09:45": "nff",
-    "10:00": "t",
-    "10:15": "tf",
-    "10:30": "tt",
-    "10:45": "tff",
-    "11:00": "el",
-    "11:15": "elf",
-    "11:30": "elt",
-    "11:45": "elff",
-    "12:00": "tw",
-    "12:15": "twf",
-    "12:30": "twt",
-    "12:45": "twff",
-    "13:00": "th",
-    "13:15": "thf",
-    "13:30": "tht",
-    "13:45": "thff",
-    "14:00": "ft",
-    "14:15": "ftf",
-    "14:30": "ftt",
-    "14:45": "ftff",
-    "15:00": "fit",
-    "15:15": "fitf",
-    "15:30": "fitt",
-    "15:45": "fitff",
-    "16:00": "sit",
-    "16:15": "sitf",
-    "16:30": "sitt",
-    "16:45": "sitff",
-    "17:00": "set",
-    "17:15": "setf",
-    "17:30": "sett",
-    "17:45": "setff",
-    "18:00": "ett",
-    "18:15": "ettf",
-    "18:30": "ettt",
-    "18:45": "ettff",
-    "19:00": "ntt",
-    "19:15": "nttf",
-    "19:30": "nttt",
-    "19:45": "nttff",
-    "20:00": "ttw",
-    "20:15": "ttwf",
-    "20:30": "ttwt",
-    "20:45": "ttwff",
-    "21:00": "to",
-    "21:15": "tof",
-    "21:30": "tot",
-    "21:45": "toff",
-    "22:00": "tto",
-    "22:15": "ttof",
-    "22:30": "ttot",
-    "22:45": "ttoff",
-    "23:00": "tth",
+const hours = {};
+
+const formatNumber = (hour) => {
+  let str = hour.toString();
+  if(str.length === 1) {
+    str = `0${str}`;
+  }
+  return str;
 }
+
+const hourToCode = (hour) => {
+  switch(hour) {
+    case '07':  return 's';
+    case '08':  return 'e';
+    case '09':  return 'n';
+    case '10':  return 't';
+    case '11':  return 'el';
+    case '12':  return 'tw';
+    case '13':  return 'th';
+    case '14':  return 'ft';
+    case '15':  return 'fit';
+    case '16':  return 'sit';
+    case '17':  return 'set';
+    case '18':  return 'ett';
+    case '19':  return 'htt';
+    case '20':  return 'ttw';
+    case '21':  return 'to';
+    case '22':  return 'tto';
+    case '23':  return 'tth';
+    default: return '';
+  }
+}
+
+const minutesToCode = (minutes) => {
+  switch(minutes) {
+    case '00':  return '';
+    case '15':  return 'f';
+    case '30':  return 't';
+    case '45':  return 'ff';
+    default: return '';
+  }
+}
+
+const timeToCode = (hour, minutes) => {
+  return `${hourToCode(hour)}${minutesToCode(minutes)}`
+}
+
+const createHoursObject = () => {
+  for(let h=7; h<23; h++) {
+    let hour = formatNumber(h);
+    for(let m=0; m<=45; m+=15) {
+      let minutes = formatNumber(m);
+      hours[`${hour}:${minutes}`] = timeToCode(hour, minutes);
+    }
+  }
+  hours['23:00'] = timeToCode('23','00');
+}
+createHoursObject();
 
 const Task = (props) => {
   const user  = AuthService.getCurrentUser();
