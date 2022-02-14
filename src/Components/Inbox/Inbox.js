@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import $ from 'jquery';
 
 import AuthService from '../../services/auth.service';
 import Heading from '../Partials/Heading';
@@ -37,9 +38,11 @@ const Inbox = (props) => {
   }, [])
 
   const eachInboxTask = (item, i) => {
+    $('#emptyInbox').show();
     if (item.id !== user.id) {
       return;
     }
+    $('#emptyInbox').hide();
     return (<InboxTask id={item._id} friendName={item.name_of_side_user} color={item.color}
       name={item.name} duration={item.duration_time} category={item.task_type}key={i}></InboxTask>);
   }
@@ -69,6 +72,7 @@ const Inbox = (props) => {
       <div className='inboxTasks' style={styles.wrapper}>
         {addTaskToSchedule()}
         {TasksArray.map(eachInboxTask)}
+        <p id="emptyInbox"><i>Empty Inbox</i></p>
       </div>
     </div>
   );
