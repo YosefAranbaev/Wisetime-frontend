@@ -120,7 +120,6 @@ button {
   position: relative;
   padding: 0.5rem 1rem;
   border: 1px solid #dfe3e6;
-  /* 	background-color: white;	 */
   color: #17394d;
   text-align: center;
 }
@@ -141,7 +140,6 @@ button {
 .schedule-item {
   background-color: white;
   border-radius: .25rem;
-  /*   box-shadow: 0 1px 0 rgba(9,45,66,.25); */
   padding: .5rem;
   margin: .25em;
 }
@@ -654,7 +652,6 @@ button {
       display: block;
   }
 
-  /*     .schedule-item { height: 70px; } */
   .grid-last {
       height: 98px;
   }

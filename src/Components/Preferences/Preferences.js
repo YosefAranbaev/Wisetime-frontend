@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
 import Heading from '../Partials/Heading';
 import Constraints from './Constraints';

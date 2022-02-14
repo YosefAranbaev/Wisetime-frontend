@@ -9,7 +9,6 @@ import Router from './Router/Router';
 import AuthService from "./services/auth.service";
 
 const App = () => {
-
   useEffect(() => {
     AuthService.isAuthorized()
     .catch(() => {
@@ -19,8 +18,8 @@ const App = () => {
 
   return (
     <div>
-      <Header />
-      <Router />
+      <Header/>
+      <Router/>
     </div>
   );
 };

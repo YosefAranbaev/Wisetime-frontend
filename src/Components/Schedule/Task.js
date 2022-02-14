@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import $ from 'jquery';
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
-import Heading from '../Partials/Heading';
 import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
 import swal2 from 'sweetalert2';
 window.Swal = swal;
-const user  = AuthService.getCurrentUser();
+
 const hours = {
     "07:00": "s",
     "07:15": "sf",
@@ -76,8 +73,11 @@ const hours = {
     "22:45": "ttoff",
     "23:00": "tth",
 }
+
 const Task = (props) => {
-    const alertBefordelete = () =>{
+  const user  = AuthService.getCurrentUser();
+  
+    const alertBefordelete = () => {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this task!",
@@ -95,23 +95,25 @@ const Task = (props) => {
             }
           });
     }
-    const deleteTask = (task) => {
-    
-        const url = `http://localhost:8080/api/users/${user.id}/tasks/${props.id}`;
-           const res = $.ajax({
-            type: "DELETE",
-            url: url,
-            headers:authHeader()
-        });
+
+    const deleteTask = (task) => {    
+      const url = `http://localhost:8080/api/users/${user.id}/tasks/${props.id}`;
+      $.ajax({
+        type: "DELETE",
+        url: url,
+        headers:authHeader()
+      });
     };
+
     const makeTaskdone = () =>{
-        const res = $.ajax({
-            type: "PUT",
-            url: `http://localhost:8080/api/users/${user.id}/tasks/${props.id}`,
-            data: { "is_done": true },
-            headers:authHeader()
-        });
+      $.ajax({
+        type: "PUT",
+        url: `http://localhost:8080/api/users/${user.id}/tasks/${props.id}`,
+        data: { "is_done": true },
+        headers:authHeader()
+      });
     }
+
     const doneTask = () => {
         swal({
             title: "Are you sure?",
@@ -139,23 +141,24 @@ const Task = (props) => {
             }
           });
     };
+    
     return (
-        <div class={"schedule-item schedule-"+props.day+" time-from-"+ hours[props.hour_end_time]+" time-to-" + hours[props.hour_start_time] +" nt bg-"+props.color}>
-            <div class="icons">
-                <button title="Done" class="done" onClick = {doneTask}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
-                    </svg>
-                </button>
+      <div class={"schedule-item schedule-"+props.day+" time-from-"+ hours[props.hour_end_time]+" time-to-" + hours[props.hour_start_time] +" nt bg-"+props.color}>
+          <div class="icons">
+              <button title="Done" class="done" onClick = {doneTask}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z" />
+                  </svg>
+              </button>
 
-                <button title="Delete" onClick={alertBefordelete} href="#myModal" class="trigger-btn" data-toggle="modal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
-                    </svg>
-                </button>
-            </div>
-            {props.name}
-        </div>
+              <button title="Delete" onClick={alertBefordelete} href="#myModal" class="trigger-btn" data-toggle="modal">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M6 1.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v1H6v-1Zm5 0v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5ZM4.5 5.029a.5.5 0 1 1 .998-.06l.5 8.5a.5.5 0 0 1-.998.06l-.5-8.5Zm6.53-.528a.5.5 0 0 1 .47.528l-.5 8.5a.5.5 0 1 1-.998-.058l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                  </svg>
+              </button>
+          </div>
+          {props.name}
+      </div>
     )
 };
 

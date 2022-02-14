@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import UserService from "../../services/user.service";
-import Heading from '../Partials/Heading';
+import React, { useState } from "react";
 import AuthService from '../../services/auth.service';
-import $ from 'jquery';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Task from './Task';
 import authHeader from "../../services/auth-header";
-const user  = AuthService.getCurrentUser();
+
 const ScheduleObj = (props) => {
+    const user  = AuthService.getCurrentUser();
+    let [Tasks, setTasks] = useState([])
+
     const getTimelist = async () => {
         try {
             const response = fetch(`http://localhost:8080/api/users/${user.id}/tasks`, { method: 'GET',headers:authHeader() })
             if (response) {
-                const jsonRes = response;
-                // console.log(response);
-                // console.log(jsonRes);
-                return jsonRes;
+                return response;
             }
             return false;
         }
@@ -25,32 +20,25 @@ const ScheduleObj = (props) => {
             return false;
         }
     }
-    let [Tasks, setTasks] = useState([])
-    const displayTasks = (taskList)=>{
-        // console.log(taskList);
-        let map = taskList.map(eachTask);
-        console.log(map);
-        return <Task/>;
-    }
+
     const eachTask =(item,i)=>{
-        if(item.is_done==true){
+        if(item.is_done){
             return;
         }
         return (<Task key={i} color={item.color} hour_start_time={item.hour_start_time} hour_end_time={item.hour_end_time}
             day={item.day} name={item.name} id={item._id}></Task>
-
         )
 
     }
+
     const addTaskToSchedule = () => {
         getTimelist().then(res => {
             res.json().then(result => {
-        //    alert("Tasks");
-            setTasks(Tasks=result);
-            // console.log(Tasks);
+                setTasks(Tasks=result);
             });
         });
     }
+
     return (
         <div role="main" class="container">
             <div class="schedule">
@@ -210,9 +198,7 @@ const ScheduleObj = (props) => {
                 <div class="grid grid-last schedule-friday time-from-tth time-to-tth"></div>
                 <div class="grid schedule-saturday time-from-s time-to-tth"></div>
                 <div class="grid grid-last schedule-saturday time-from-tth time-to-tth"></div>
-                {/* <Task/> */}
                 {addTaskToSchedule()}
-                {/* {console.log(addTaskToSchedule)} */}
                 {Tasks.map(eachTask)}
             </div>
         </div>

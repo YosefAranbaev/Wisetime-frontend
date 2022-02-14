@@ -10,6 +10,7 @@ import AddTask from "../Components/Form/AddTask";
 import Statistics from "../Components/Statistics";
 import Inbox from "../Components/Inbox/Inbox";
 import AddToFriend from "../Components/Inbox/AddToFriend";
+
 const Router = (props) => {
 
   return (

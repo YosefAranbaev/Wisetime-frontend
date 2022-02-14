@@ -57,6 +57,9 @@ const Register = (props) => {
       boxShadow:' 2px 2px 2px rgba(0, 0, 0, 0.1)',
       borderRadius: '10px',
       border: 'none'
+    },
+    button: {
+      marginTop: '10px'
     }
   }
 
@@ -183,7 +186,7 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button className="btn btn-primary btn-block" style={styles.button}>Sign Up</button>
               </div>
             </div>
           )}

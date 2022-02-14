@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import $ from 'jquery';
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
-import Heading from '../Partials/Heading';
 import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
 import Button from '@mui/material/Button';
@@ -71,10 +68,10 @@ const InboxTask = (props) => {
             });
     }
     const errorTreatment = (err) => {
-        if (err == 409) {
+        if (err === 409) {
             swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
         }
-        if (err == 500) {
+        if (err === 500) {
             swal("Note!", "Error getting the data from db", "error");
         }
     }
@@ -86,7 +83,7 @@ const InboxTask = (props) => {
             'dauration': props.duration
         }
         console.log(newTask);
-        const res = $.ajax({
+        $.ajax({
             type: "POST",
             url: `http://localhost:8080/api/users/${user.id}/tasks`,
             data: newTask,

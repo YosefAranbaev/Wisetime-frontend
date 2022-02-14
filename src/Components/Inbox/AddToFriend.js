@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
 import Heading from '../Partials/Heading';
 
@@ -81,7 +80,7 @@ const AddToFriend = (props) => {
   }
   const isValidEmail = async () => {
     await getUserByemail();
-    if (!userId || userId == "")
+    if (!userId || userId === "")
       return false;
     return true;
   }
@@ -94,7 +93,7 @@ const AddToFriend = (props) => {
       $('.formError').append("Wrong Email!");
       return false;
     }
-    else if (userId == user.id) {
+    else if (userId === user.id) {
       $(".formError").html("");
       $('.formError').append("This is your email, please add task with the Add Task Form!");
       return false;
@@ -104,7 +103,7 @@ const AddToFriend = (props) => {
       $('.formError').append("The duration should be positive number and consistent every 15 minutes!");
       return false;
     }
-    else if (taskName == "" || taskColor == "" || taskType == "" || taskDuration == 0 || userEmail == "") {
+    else if (taskName === "" || taskColor === "" || taskType === "" || taskDuration === 0 || userEmail === "") {
       $(".formError").html("");
       $('.formError').append("Please fill all the fields in the form!");
       return false;
@@ -113,7 +112,7 @@ const AddToFriend = (props) => {
   }
   const fileErrorTreatment = (err) => {
     $(".formError").html("");
-    if (err == 500) {
+    if (err === 500) {
       $(".formError").append("Error getting the data from db");
       swal("Note!", "Error getting the data from db", "error");
     }

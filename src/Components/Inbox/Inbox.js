@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
 import Heading from '../Partials/Heading';
-import $ from 'jquery';
 import authHeader from "../../services/auth-header";
 import InboxTask from "./InboxTask";
 
 const Inbox = (props) => {
-  let [TasksArray, setTasksArray] = useState([])
   const styles = {
     container: {
       marginTop: '30px',
@@ -28,22 +25,23 @@ const Inbox = (props) => {
     }
   }
 
+  let [TasksArray, setTasksArray] = useState([]) 
   const user = AuthService.getCurrentUser();
   const history = useHistory();
+
   useEffect(() => {
     AuthService.isAuthorized()
       .catch(() => {
         history.push("/");
       })
   }, [])
+
   const eachInboxTask = (item, i) => {
-    if (item.id != user.id) {
+    if (item.id !== user.id) {
       return;
     }
     return (<InboxTask id={item._id} friendName={item.name_of_side_user} color={item.color}
       name={item.name} duration={item.duration_time} category={item.task_type}key={i}></InboxTask>);
-
-
   }
   const getInboxTasks = async () => {
     try {
@@ -68,7 +66,7 @@ const Inbox = (props) => {
   return (
     <div className="container" style={styles.container}>
       <Heading heading='Inbox' />
-      <div style={styles.wrapper}>
+      <div className='inboxTasks' style={styles.wrapper}>
         {addTaskToSchedule()}
         {TasksArray.map(eachInboxTask)}
       </div>

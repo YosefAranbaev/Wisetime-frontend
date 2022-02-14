@@ -23,6 +23,9 @@ const Login = (props) => {
       boxShadow:' 2px 2px 2px rgba(0, 0, 0, 0.1)',
       borderRadius: '10px',
       border: 'none'
+    },
+    button: {
+      marginTop: '10px'
     }
   }
 
@@ -113,7 +116,7 @@ const Login = (props) => {
           </div>
 
           <div className="form-group">
-            <button className="btn btn-primary btn-block" disabled={loading}>
+            <button className="btn btn-primary btn-block" style={styles.button} disabled={loading}>
               {loading && (
                 <span className="spinner-border spinner-border-sm"></span>
               )}
@@ -128,6 +131,7 @@ const Login = (props) => {
               </div>
             </div>
           )}
+
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
       </div>

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-import UserService from "../../services/user.service";
 import AuthService from '../../services/auth.service';
 
 const Category = (props) => {
