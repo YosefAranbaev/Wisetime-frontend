@@ -130,7 +130,9 @@ const AddToFriend = (props) => {
           "name_of_side_user": user.username,
           "color": taskColor,
           "task_type": parseInt(friend.categories[taskType]),
+          "category": taskType
         }
+
         $.ajax({
           type: "POST",
           url: `http://localhost:8080/api/inbox/`,

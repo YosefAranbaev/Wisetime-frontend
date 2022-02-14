@@ -36,12 +36,12 @@ const Statistics = (props) => {
   }, [])
 
   useEffect(() => {
-    UserService.getGauge()
+    UserService.getGauge(user.id)
       .then(response => {
         setGauge(response.data.chart);
       })
 
-    UserService.getChart()
+    UserService.getChart(user.id)
       .then(response => {
         setChart(response.data.chart);
       })
@@ -51,8 +51,8 @@ const Statistics = (props) => {
     <div className="container" style={styles.container}>
         <Heading heading='Statistics' />
         <div className='charts' style={styles.charts}>
-          <div dangerouslySetInnerHTML={{__html: gauge}} />
           <div dangerouslySetInnerHTML={{__html: chart}} />
+          <div dangerouslySetInnerHTML={{__html: gauge}} />
         </div>
     </div>
   );

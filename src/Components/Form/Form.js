@@ -8,10 +8,13 @@ import AuthService from '../../services/auth.service';
 import Button from '@mui/material/Button';
 import authHeader from "../../services/auth-header";
 import swal from 'sweetalert';
+
 const user = AuthService.getCurrentUser();
+
 const confirmBtm = {
     marginTop:'20px'
 }
+
 const categories = [
     {
         value: 'chores',
@@ -30,6 +33,7 @@ const categories = [
         label: 'work',
     },
 ];
+
 const colors = [
     {
         value: 'red',
@@ -48,6 +52,7 @@ const colors = [
         label: 'blue',
     },
 ];
+
 const AddTask = (props) => {
     let [taskName, setTaskname] = useState("");
     let [taskDuration, setTaskduration] = useState("");
@@ -55,9 +60,11 @@ const AddTask = (props) => {
     let [taskColor, setTaskcolor] = useState("");
     let [userCategory, setUsercategory] = useState(0.25);
     const history = useHistory();
+
     const formErr = {
         color: "red"
     }
+
     const fileErrorTreatment = (res) => {
         const err = res.status
         $(".formError").html("");
@@ -71,15 +78,16 @@ const AddTask = (props) => {
             swal("Note!", "Error getting the data from db", "error");
         }
     }
+
     const getUsercategory = async (taskT) => {
         const res = await fetch(`http://localhost:8080/api/users/${user.id}/categories`, { method: 'GET', headers: authHeader() })
         const result = await res.json()
         setUsercategory(userCategory = result[taskT]);
     }
+
     const formValidation = async () => {
         getUsercategory(taskType).then(() => {
-            if(taskName.length>35){
-                
+            if(taskName.length>35){        
                 $('.formError').html("The name of the task should be less than 36 characters!");
             }
             else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
@@ -89,13 +97,14 @@ const AddTask = (props) => {
                 $('.formError').html("Please fill all the fields in the form!");
             }
             else {
-
                 const newTask = {
                     'name': taskName,
                     'color': taskColor,
                     'category': userCategory,
-                    'dauration': parseFloat(taskDuration)
+                    'dauration': parseFloat(taskDuration),
+                    'categoryName': taskType
                 }
+
                 $.ajax({
                     type: "POST",
                     url: `http://localhost:8080/api/users/${user.id}/tasks`,
@@ -109,12 +118,10 @@ const AddTask = (props) => {
                         fileErrorTreatment(response);
                     }
                 });
-
             }
-
-
         })
     }
+
     return (
         <>
             <Box component="form" sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' }, }} noValidate autoComplete="off">

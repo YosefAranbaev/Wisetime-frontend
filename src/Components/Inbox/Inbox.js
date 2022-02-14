@@ -44,7 +44,7 @@ const Inbox = (props) => {
     }
     $('#emptyInbox').hide();
     return (<InboxTask id={item._id} friendName={item.name_of_side_user} color={item.color}
-      name={item.name} duration={item.duration_time} category={item.task_type}key={i}></InboxTask>);
+      name={item.name} duration={item.duration_time} category={item.task_type} key={i} categoryName={item.category}></InboxTask>);
   }
   const getInboxTasks = async () => {
     try {

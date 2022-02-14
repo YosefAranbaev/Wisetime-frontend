@@ -81,9 +81,9 @@ const InboxTask = (props) => {
             'name': props.name,
             'color': props.color,
             'category': props.category,
-            'dauration': props.duration
+            'dauration': props.duration,
+            'categoryName': props.categoryName
         }
-        console.log(newTask);
         $.ajax({
             type: "POST",
             url: `http://localhost:8080/api/users/${user.id}/tasks`,
