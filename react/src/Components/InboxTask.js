@@ -70,9 +70,10 @@ const InboxTask = (props) => {
                 }
             });
     }
-    const errorTreatment = (err) => {
+    const errorTreatment = (res) => {
+        const err = res.status;
         if (err == 409) {
-            swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
+            swal("Note!", `${res.responseJSON} due to the constraints, categories, and schedule frictions`, "warning");
         }
         if (err == 500) {
             swal("Note!", "Error getting the data from db", "error");
@@ -96,7 +97,7 @@ const InboxTask = (props) => {
                 swal("Good luck!", "The Event was created successfully!", "success");
             },
             error: (response) => {
-                errorTreatment(response.status);
+                errorTreatment(response);
             }
         });
     }
