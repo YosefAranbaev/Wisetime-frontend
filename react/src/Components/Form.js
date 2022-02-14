@@ -59,11 +59,13 @@ const AddTask = (props) => {
     const formErr = {
         color: "red"
     }
-    const fileErrorTreatment = (err) => {
+    const fileErrorTreatment = (res) => {
+        const err = res.status
         $(".formError").html("");
         if (err == 409) {
-            $(".formError").append("There were hours left that were not entered into the system due to the constraints and categories!");
-            swal("Note!", "There were hours left that were not entered into the system due to the constraints and categories!", "warning");
+            console.log(res.responseJSON);
+            $(".formError").append(`There were hours left that were not entered into the system due to the constraints and categories!`);
+            swal("Note!", `${res.responseJSON} due to the constraints, categories, and schedule frictions` , "warning");
         }
         if (err == 500) {
             $(".formError").append("Error getting the data from db");
@@ -106,7 +108,7 @@ const AddTask = (props) => {
                         swal("Good luck!", "The Event was created successfully!", "success");
                     },
                     error: (response) => {
-                        fileErrorTreatment(response.status);
+                        fileErrorTreatment(response);
                     }
                 });
 
