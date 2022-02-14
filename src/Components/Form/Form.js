@@ -14,7 +14,7 @@ const user = AuthService.getCurrentUser();
 const confirmBtm = {
     marginTop:'20px'
 }
-const currencies = [
+const categories = [
     {
         value: 'chores',
         label: 'chores',
@@ -141,7 +141,7 @@ const AddTask = (props) => {
                         defaultValue=""
                         onChange={e => { setTasktype(taskType = e.target.value); }}
                     >
-                        {currencies.map((option) => (
+                        {categories.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                             </MenuItem>
