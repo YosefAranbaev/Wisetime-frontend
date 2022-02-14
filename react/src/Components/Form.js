@@ -14,7 +14,7 @@ const user = AuthService.getCurrentUser();
 const confirmBtm = {
     marginTop:'20px'
 }
-const currencies = [
+const categories = [
     {
         value: 'chores',
         label: 'chores',
@@ -79,7 +79,7 @@ const AddTask = (props) => {
         getUsercategory(taskType).then(() => {
             $(".formError").html("");
             if(taskName.length>35){
-                
+
                 $('.formError').append("The name of the task should be less than 36 characters!");
             }
             else if (taskDuration < 0 || !parseFloat(taskDuration) || (((taskDuration % 1) * 100) % 25 !== 0)) {
@@ -142,7 +142,7 @@ const AddTask = (props) => {
                         defaultValue=""
                         onChange={e => { setTasktype(taskType = e.target.value); }}
                     >
-                        {currencies.map((option) => (
+                        {categories.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                                 {option.label}
                             </MenuItem>
