@@ -197,7 +197,7 @@ const ScheduleObj = (props) => {
                 <div class="grid schedule-friday time-from-s time-to-tth"></div>
                 <div class="grid grid-last schedule-friday time-from-tth time-to-tth"></div>
                 <div class="grid schedule-saturday time-from-s time-to-tth"></div>
-                <div class="grid grid-last schedule-saturday time-from-tth time-to-tth"></div>
+                <div class="grid grid-last schedule-saturday time-from-tth time-to-tth"></div>               
                 {addTaskToSchedule()}
                 {Tasks.map(eachTask)}
             </div>
