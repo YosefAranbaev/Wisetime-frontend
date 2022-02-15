@@ -16,7 +16,6 @@ const ScheduleObj = (props) => {
             return false;
         }
         catch (e) {
-            console.log("fetch failed", e);
             return false;
         }
     }

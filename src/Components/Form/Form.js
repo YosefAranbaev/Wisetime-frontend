@@ -69,7 +69,6 @@ const AddTask = (props) => {
         const err = res.status
         $(".formError").html("");
         if (err === 409) {
-            console.log(res.responseJSON);
             $(".formError").append(`There were hours left that were not entered into the system due to the constraints and categories!`);
             swal("Note!", `${res.responseJSON} due to the constraints, categories, and schedule frictions` , "warning");
         }
